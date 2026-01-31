@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1737889200000-president",
+    "name": "مالك الجمعية",
+    "email": "bedaihsa@gmail.com",
+    "role": "president",
+    "active": true,
+    "permissions": [
+      "beneficiaries:view",
+      "jobs:view",
+      "contact:view",
+      "analytics:view",
+      "employees:add",
+      "employees:remove",
+      "employees:edit",
+      "audit:view"
+    ],
+    "phone": ""
+  },
+  {
+    "id": "1769419201365-snub0u",
+    "name": "محمد",
+    "email": "mhmed666q@gmail.com",
+    "role": "staff",
+    "phone": "0533170903",
+    "notes": "",
+    "active": true,
+    "permissions": [
+      "employees:edit",
+      "audit:view",
+      "beneficiaries:view",
+      "jobs:view",
+      "contact:view",
+      "analytics:view",
+      "employees:add",
+      "employees:remove"
+    ]
+  },
+  {
+    "id": "bedaih-1",
+    "name": "Bedaih Admin",
+    "email": "bedaihsa@gmail.com",
+    "role": "admin",
+    "phone": null,
+    "notes": "Created locally for development",
+    "active": true,
+    "permissions": ["*"],
+    "created_at": "2026-01-31T00:00:00.000Z"
+  }
+]

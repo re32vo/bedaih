@@ -1,0 +1,37 @@
+{
+  "beneficiaries": [
+    {
+      "id": 1,
+      "name": "أحمد محمد",
+      "email": "ahmed@example.com",
+      "phone": "0512345678",
+      "address": "الرياض - حي النخيل",
+      "familyMembers": 5,
+      "monthlyIncome": "3000",
+      "assistanceType": "مساعدة مالية",
+      "description": "عائلة محتاجة للمساعدة",
+      "createdAt": "2026-01-25T08:30:00.000Z"
+    },
+    {
+      "fullName": "يي",
+      "nationalId": "2393033432ل",
+      "address": "يي",
+      "phone": "0533170903",
+      "email": "re32vo@gmail.com",
+      "assistanceType": "إسكان",
+      "id": 2,
+      "createdAt": "2026-01-26T09:55:00.399Z"
+    },
+    {
+      "fullName": "ؤ",
+      "nationalId": "ؤيؤ",
+      "address": "ؤ",
+      "phone": "ؤ",
+      "email": "mhmed666q@gmail.com",
+      "assistanceType": "education",
+      "id": 3,
+      "createdAt": "2026-01-26T09:59:05.633Z"
+    }
+  ],
+  "nextId": 4
+}
