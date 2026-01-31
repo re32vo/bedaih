@@ -32,8 +32,9 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="text-center relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900">
+      <div className="text-center relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
         <div className="container mx-auto relative z-10 px-4 sm:px-6 lg:px-8 space-y-2 sm:space-y-3 md:space-y-4">
+          <img src="/12.jpg" alt="صورة تواصل معنا" className="mx-auto mb-4 max-h-48 rounded-xl shadow" />
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black">تواصل معنا 💬</h1>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-black max-w-2xl mx-auto">نسعد باستقبال استفساراتكم واقتراحاتكم والإجابة عن جميع أسئلتكم بسرعة واهتمام</p>
         </div>
