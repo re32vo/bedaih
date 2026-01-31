@@ -5,25 +5,27 @@ export default function About() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="relative pt-0 pb-0 bg-white">
+        {/* Banner Image */}
+        <div className="w-full relative">
+          <img src="https://i.postimg.cc/nhvxqddh/12.jpg" alt="بانر من نحن" className="w-full h-64 object-cover object-center" />
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 -mt-16">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center space-y-6"
+            className="text-center space-y-6 bg-white bg-opacity-90 rounded-xl py-8 shadow"
           >
             <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-black/10">
               <Heart className="w-4 h-4 text-black" />
               <span className="text-black text-sm font-medium">من نحن</span>
             </div>
-            
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black leading-tight">
               جمعية بداية الخيرية
             </h1>
-            
-            <p className="text-lg sm:text-xl text-black max-w-3xl mx-auto">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-black max-w-3xl mx-auto">
               نبني الأمل ونصنع الفرق في حياة المحتاجين
-            </p>
+            </h2>
           </motion.div>
         </div>
       </section>

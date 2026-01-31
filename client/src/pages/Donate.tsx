@@ -136,56 +136,36 @@ export default function Donate() {
   const quickAmounts = [10, 20, 30, 50, 100, 500, 1000, 2000];
 
   return (
-    <div className="min-h-screen bg-slate-900">
-      {/* Hero Section */}
-      <section className="relative min-h-[400px] sm:min-h-[480px] md:h-[600px] lg:h-[700px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <picture>
-            <source media="(max-width: 640px)" srcSet="/1.jpg" sizes="100vw" />
-            <source media="(max-width: 1024px)" srcSet="/2.jpg" sizes="100vw" />
-            <source media="(min-width: 1025px)" srcSet="/3.jpg" sizes="100vw" />
-            <img
-              src="/3.jpg"
-              alt="طفل يحلم بمستقبل أفضل"
-              className="w-full h-full object-cover object-center opacity-30"
-              loading="eager"
-              sizes="100vw"
-              style={{ width: '100%', height: '100%', display: 'block' }}
-            />
-          </picture>
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/70 to-slate-900/50" />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-slate-900" />
+    <div className="min-h-screen bg-white">
+      {/* Hero Section - banner like Home/About */}
+      <section className="relative pt-0 pb-0 bg-white">
+        <div className="w-full relative">
+          <img src="https://h.top4top.io/p_3683pksu61.jpg" alt="بانر التبرع" className="w-full h-64 object-cover object-center" />
         </div>
 
-        <div className="px-4 sm:px-6 max-w-5xl mx-auto relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 -mt-16 mb-0">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="space-y-4 sm:space-y-6 md:space-y-8 text-center"
+            className="text-center space-y-6 bg-white bg-opacity-90 rounded-xl py-8 shadow"
           >
-            <div className="inline-flex items-center gap-2 bg-emerald-500/20 px-4 py-2 rounded-full border border-emerald-500/30">
-              <Heart className="w-4 h-4 text-emerald-400" />
-              <span className="text-emerald-400 text-sm font-medium">تبرع وغير الحياة</span>
+            <div className="inline-flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100">
+              <Heart className="w-4 h-4 text-emerald-500" />
+              <span className="text-emerald-600 text-sm font-medium">تبرع وغير الحياة</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight space-y-2">
-              <div style={{ lineHeight: '1.3' }} className="text-white">كل ريال</div>
-              <span style={{ 
-                display: 'block', 
-                marginTop: '1rem', 
-                fontWeight: '900',
-                lineHeight: '1.2'
-              }} className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">يحمل أملاً</span>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black leading-tight">
+              كل ريال
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0">
-              تبرعك ليس مجرد رقم، بل حياة جديدة تبدأ، أسرة تستقر، وطفل يحلم بمستقبل أفضل
-            </p>
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-black max-w-3xl mx-auto">
+              يحمل أملاً
+            </h2>
           </motion.div>
         </div>
       </section>
 
       {/* Amount Selection */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-slate-800">
+      <section id="amount-selection" className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -194,8 +174,8 @@ export default function Donate() {
             className="text-center space-y-12"
           >
             <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">اختر مبلغ التبرع</h2>
-              <p className="text-slate-300">ادخل المبلغ الذي تود التبرع به</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">اختر مبلغ التبرع</h2>
+              <p className="text-slate-700">ادخل المبلغ الذي تود التبرع به</p>
             </div>
 
             {/* Quick Amount Buttons */}
@@ -210,8 +190,8 @@ export default function Donate() {
                   }}
                   className={`p-4 rounded-lg border-2 transition-all font-bold ${
                     customAmount === amount.toString()
-                      ? 'border-emerald-500 bg-emerald-500/20 text-emerald-400'
-                      : 'border-slate-700 bg-slate-900/50 hover:border-emerald-500/50 text-white'
+                      ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
+                      : 'border-slate-300 bg-white hover:border-emerald-500/50 text-slate-700'
                   }`}
                 >
                   ر.س {amount}
@@ -226,7 +206,7 @@ export default function Donate() {
               viewport={{ once: true }}
               className="max-w-md mx-auto w-full"
             >
-              <label className="block text-sm font-bold text-slate-200 mb-3">أو ادخل مبلغاً آخر</label>
+              <label className="block text-sm font-bold text-slate-900 mb-3">أو ادخل مبلغاً آخر</label>
               <input
                 type="number"
                 value={customAmount}
@@ -235,7 +215,7 @@ export default function Donate() {
                   setSelectedAmount(null);
                 }}
                 placeholder="مثال: 100"
-                className="w-full px-4 py-3 border-2 border-slate-700 bg-slate-900 text-white rounded-lg focus:outline-none focus:border-emerald-500 text-lg"
+                className="w-full px-4 py-3 border-2 border-slate-300 bg-white text-slate-900 rounded-lg focus:outline-none focus:border-emerald-500 text-lg"
                 min="1"
               />
             </motion.div>
@@ -262,16 +242,16 @@ export default function Donate() {
 
       {/* Payment Methods Section */}
       {showPaymentMethods && (
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-slate-900" ref={paymentDetailsRef}>
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white" ref={paymentDetailsRef}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="space-y-8"
+            className="space-y-2"
           >
             <div className="text-center">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">اختر طريقة الدفع</h2>
-              <p className="text-slate-300">تبرع: <span className="font-bold text-emerald-400">ر.س {finalAmount}</span></p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2">اختر طريقة الدفع</h2>
+              <p className="text-slate-700">تبرع: <span className="font-bold text-emerald-600">ر.س {finalAmount}</span></p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
@@ -282,8 +262,8 @@ export default function Donate() {
                   onClick={() => setSelectedMethod(method.id)}
                   className={`p-6 rounded-lg border-2 transition-all text-center ${
                     selectedMethod === method.id
-                      ? 'border-emerald-500 bg-emerald-500/20'
-                      : 'border-slate-700 hover:border-emerald-500/50 bg-slate-800/50'
+                      ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
+                      : 'border-slate-300 hover:border-emerald-500/50 bg-white text-slate-700'
                   }`}
                 >
                   {method.id === 3 ? (
@@ -299,23 +279,23 @@ export default function Donate() {
                       {method.emoji}
                     </div>
                   )}
-                  <h3 className="font-bold text-white mb-1">{method.title}</h3>
-                  <p className="text-xs text-slate-400">{method.description}</p>
+                  <h3 className="font-bold text-slate-900 mb-1">{method.title}</h3>
+                  <p className="text-xs text-slate-700">{method.description}</p>
                 </motion.button>
               ))}
             </div>
 
             {/* Payment Method Details */}
-            {selectedMethodObj && (
+              {selectedMethodObj && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-slate-800 rounded-lg p-6 md:p-8 max-w-2xl mx-auto border-2 border-emerald-500/30"
+                className="bg-white rounded-lg p-6 md:p-8 max-w-2xl mx-auto border-2 border-slate-200 shadow-sm"
               >
                 {selectedMethodObj.id === 1 && selectedMethodObj.details && (
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between mb-6 pb-6 border-b-2 border-slate-700">
-                      <h4 className="font-bold text-white text-lg">بيانات التحويل البنكي</h4>
+                    <div className="flex items-center justify-between mb-6 pb-6 border-b-2 border-slate-200">
+                      <h4 className="font-bold text-slate-900 text-lg">بيانات التحويل البنكي</h4>
                       <img 
                         src="/Alinma-Bank-Symbol.png" 
                         alt="بنك الإنماء" 
@@ -328,19 +308,19 @@ export default function Donate() {
                       { label: 'رقم الحساب', value: selectedMethodObj.details.accountNumber, id: 2 },
                       { label: 'الآيبان', value: selectedMethodObj.details.iban, id: 3 }
                     ].map((item) => (
-                      <div key={item.id} className="flex items-center justify-between bg-slate-900 p-4 rounded-lg border border-slate-700">
+                      <div key={item.id} className="flex items-center justify-between bg-white p-4 rounded-lg border border-slate-200">
                         <div>
-                          <p className="text-xs text-slate-400 mb-1">{item.label}</p>
-                          <p className="font-bold text-white">{item.value}</p>
+                          <p className="text-xs text-slate-600 mb-1">{item.label}</p>
+                          <p className="font-bold text-slate-900">{item.value}</p>
                         </div>
                         <button
                           onClick={() => copyToClipboard(item.value, item.id)}
-                          className="p-2 hover:bg-slate-700 rounded transition-colors"
+                          className="p-2 hover:bg-slate-100 rounded transition-colors"
                         >
                           {copied === item.id ? (
                             <Check className="w-5 h-5 text-emerald-400" />
                           ) : (
-                            <Copy className="w-5 h-5 text-slate-400" />
+                            <Copy className="w-5 h-5 text-slate-500" />
                           )}
                         </button>
                       </div>
@@ -348,42 +328,41 @@ export default function Donate() {
                   </div>
                 )}
                 {selectedMethodObj.id === 2 && (
-                  <div className="text-center py-8">
+                  <div className="text-center py-6">
                     <div className="text-5xl mb-4">💳</div>
-                    <p className="text-slate-300 text-lg">سيتم تحويلك لبوابة الدفع الآمنة لإتمام العملية</p>
+                    <p className="text-slate-700 text-lg">سيتم تحويلك لبوابة الدفع الآمنة لإتمام العملية</p>
                   </div>
                 )}
                 {selectedMethodObj.id === 3 && (
-                  <div className="text-center py-8">
+                  <div className="text-center py-6">
                     <img 
                       src="/ap.jpg" 
                       alt="Apple Pay" 
                       className="h-16 mx-auto mb-4 object-contain"
                     />
-                    <p className="text-slate-300 text-lg">ادفع بسهولة وأمان عبر Apple Pay</p>
+                    <p className="text-slate-700 text-lg">ادفع بسهولة وأمان عبر Apple Pay</p>
                   </div>
                 )}
               </motion.div>
             )}
 
-            <div className="flex gap-3 max-w-md mx-auto">
+            <div className="flex flex-col items-center gap-3 w-full -mt-6">
               <Button
                 onClick={() => {
                   setShowPaymentMethods(false);
                   setSelectedMethod(null);
                 }}
                 variant="outline"
-                className="flex-1"
+                className="px-6 py-3 w-40"
               >
                 إلغاء
               </Button>
               <Button
                 onClick={handleCompletePayment}
                 disabled={!selectedMethod}
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white"
+                className="w-64 px-6 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-lg shadow-lg text-xl font-extrabold"
               >
-                <Heart className="w-4 h-4 ml-2" />
-                تأكيد التبرع
+                <span className="block w-full text-center leading-none">تأكيد التبرع</span>
               </Button>
             </div>
           </motion.div>
@@ -392,7 +371,7 @@ export default function Donate() {
       )}
 
       {/* FAQ Section */}
-      <section className="py-16 sm:py-24 md:py-32 bg-slate-800">
+      <section className="py-16 sm:py-24 md:py-32 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -400,7 +379,7 @@ export default function Donate() {
             viewport={{ once: true }}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white">أسئلة شائعة</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900">أسئلة شائعة</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -428,10 +407,10 @@ export default function Donate() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-slate-900/50 border border-slate-700 rounded-lg p-6"
+                className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm"
               >
-                <h3 className="text-lg font-bold text-white mb-3">{item.q}</h3>
-                <p className="text-slate-300 leading-relaxed">{item.a}</p>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">{item.q}</h3>
+                <p className="text-slate-700 leading-relaxed">{item.a}</p>
               </motion.div>
             ))}
           </div>

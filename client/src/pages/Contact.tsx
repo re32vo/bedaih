@@ -32,15 +32,21 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="text-center relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
-        <div className="container mx-auto relative z-10 px-4 sm:px-6 lg:px-8 space-y-2 sm:space-y-3 md:space-y-4">
-          <img src="/12.jpg" alt="صورة تواصل معنا" className="mx-auto mb-4 max-h-48 rounded-xl shadow" />
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black">تواصل معنا 💬</h1>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-black max-w-2xl mx-auto">نسعد باستقبال استفساراتكم واقتراحاتكم والإجابة عن جميع أسئلتكم بسرعة واهتمام</p>
+      {/* Banner Image */}
+      {/* Banner Image */}
+      <div className="w-full relative">
+        <img src="https://i.postimg.cc/vmWMyPRz/12.jpg" alt="بانر تواصل معنا" className="w-full h-64 object-cover object-center" />
+      </div>
+      {/* Banner Text */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 -mt-8">
+        <div className="text-center space-y-4 bg-white bg-opacity-90 rounded-xl py-8 shadow">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4">تواصل معنا 💬</h1>
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-black max-w-2xl text-center mx-auto">نسعد باستقبال استفساراتكم واقتراحاتكم والإجابة عن جميع أسئلتكم بسرعة واهتمام</h2>
         </div>
       </div>
+      {/* Description under banner */}
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
         <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
           
           {/* Contact Info Cards */}
@@ -93,10 +99,6 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* Map Placeholder */}
-            <div className="bg-slate-800 border border-slate-700 h-64 rounded-2xl w-full flex items-center justify-center text-slate-300">
-               <span className="flex items-center gap-2 text-black"><MapPin /> خريطة جوجل</span>
-            </div>
           </div>
 
           {/* Contact Form */}

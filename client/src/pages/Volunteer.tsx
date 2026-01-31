@@ -200,13 +200,7 @@ export default function Volunteer() {
                       <DialogDescription className="text-black">
                         أخبرنا عن نفسك ولماذا تريد التطوع معنا
                       </DialogDescription>
-                      <div className="flex justify-center my-4">
-                        <img
-                          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
-                          alt="متطوعون يعملون معاً"
-                          className="rounded-lg shadow-md max-h-36 object-cover"
-                        />
-                      </div>
+                      {/* image removed per request */}
                     </DialogHeader>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-white">
                       <div className="space-y-2">

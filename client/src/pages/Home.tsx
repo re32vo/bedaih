@@ -51,7 +51,7 @@ function StatCounter() {
           <div className={`mx-auto w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center mb-2 sm:mb-4 shadow-lg`}>
             <stat.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
           </div>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900">
+          <h3 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900" style={{ fontFamily: 'Cairo, Tajawal, sans-serif', fontWeight: 800, letterSpacing: '-1px' }}>
             {inView ? <CountUp end={stat.value} duration={2} separator="," /> : "0"}+
           </h3>
           <p className="text-xs sm:text-sm text-slate-700 font-medium">{stat.label}</p>
@@ -65,114 +65,52 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[500px] sm:min-h-[600px] md:h-[750px] lg:h-[900px] flex items-center justify-center overflow-hidden bg-white">
-        {/* Background image with responsive sources and soft overlay */}
-        <div className="absolute inset-0">
-          <picture>
-            <source media="(max-width: 640px)" srcSet="/hero-therapy-mobile.jpg" />
-            <source media="(max-width: 1024px)" srcSet="/hero-therapy-tablet.jpg" />
-            <source media="(min-width: 1025px)" srcSet="/hero-therapy-desktop.jpg" />
-            <img
-              src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=2000&q=90"
-              alt="جلسة علاج نفسي بين طبيب ومريض"
-              className="w-full h-full object-cover object-center opacity-20"
-              loading="eager"
-              sizes="100vw"
-            />
-          </picture>
-          <div className="absolute inset-0 bg-white/80" />
-          <div className="absolute bottom-0 left-0 right-0 h-40 bg-white/80" />
-          <div className="absolute inset-0 bg-white/40" />
+      <section className="relative pt-0 pb-0 bg-white">
+        {/* Banner Image */}
+        <div className="w-full relative">
+          <img src="https://i.postimg.cc/FR2kMGwx/12-(1).jpg" alt="بانر الرئيسية" className="w-full h-64 object-cover object-center" />
         </div>
-
-        {/* Content */}
-        <div className="hero-content px-4 sm:px-6 max-w-5xl mx-auto relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 -mt-16 mb-0">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 text-center"
+            className="text-center space-y-6 bg-white rounded-xl py-8 shadow"
           >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="inline-flex items-center gap-2 bg-emerald-500/20 px-6 py-3 rounded-full border border-emerald-500/30">
-                <span className="text-emerald-400 font-medium">معاً نحن أقوى ✨</span>
-              </div>
-            </motion.div>
-
-            {/* Main Title */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-                <span className="text-slate-900">مد يد العون</span><br/>
-                <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">لتزهر الحياة</span>
-              </h1>
-            </motion.div>
-
-            {/* Description */}
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-700 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0"
-            >
-              في جمعية بداية، نؤمن بأن العطاء هو جسر الأمل. نكرس جهودنا لدعم المحتاجين وبناء مجتمع متكافل تسوده الرحمة والكرامة.
-            </motion.p>
-
-            {/* CTA Buttons */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full"
-              >
-              <Link href="/about">
-                <motion.button
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold shadow-lg flex items-center justify-center gap-2 hover:shadow-emerald-500/50"
-                >
-                  <ArrowRight className="w-5 h-5" />
-                  تعرف علينا
-                </motion.button>
-              </Link>
-              
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black leading-tight">
+              معاً نصنع الأثر الحقيقي
+            </h1>
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-black max-w-3xl mx-auto">
+              كن جزءاً من التغيير وشاركنا في بناء مستقبل أفضل للمجتمع
+            </h2>
+            <div className="flex justify-center mt-6">
+              <button
+                className="px-8 py-4 rounded-lg bg-slate-800 text-white border-2 border-emerald-500/50 shadow-md flex items-center justify-center gap-2 font-semibold hover:bg-slate-700 transition-all text-lg"
                 onClick={() => {
                   document.getElementById('donate-section')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-slate-800 text-white border-2 border-emerald-500/50 shadow-md flex items-center justify-center gap-2 font-semibold hover:bg-slate-700"
               >
-                <Heart className="w-5 h-5" />
-                تبرع الآن
-              </motion.button>
-            </motion.div>
+                <span>تبرع الآن</span>
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Statistics Section */}
-      <section className="py-12 sm:py-16 md:py-24 mt-6 sm:-mt-10 md:-mt-24 relative z-20 container px-4 sm:px-6 lg:px-8 bg-white">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <StatCounter />
-        </motion.div>
+      <section className="py-8 mb-8 relative z-20 bg-white">
+        <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <StatCounter />
+          </motion.div>
+        </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-12 sm:py-16 md:py-24 bg-slate-50">
+      <section id="about" className="py-8 mb-8 bg-white">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
             <motion.div 
@@ -243,7 +181,7 @@ export default function Home() {
       </section>
 
       {/* Values Section */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-24 bg-white">
+      <section className="py-8 mb-8 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 sm:mb-4 md:mb-6">ركائز طموحنا</h2>
           <p className="text-sm sm:text-base md:text-lg text-slate-700 max-w-2xl mx-auto">نعمل وفق استراتيجية متكاملة تضمن تحقيق أثر مستدام في المجتمع</p>
@@ -275,7 +213,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-24 bg-white">
+      <section className="py-8 mb-8 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-2 sm:mb-3 md:mb-4">🌟 مشاريعنا الخيرية</h2>
@@ -307,8 +245,7 @@ export default function Home() {
       </section>
 
       {/* Donate CTA */}
-      <section id="donate-section" className="py-8 sm:py-12 md:py-16 lg:py-24 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+      <section id="donate-section" className="py-8 mb-0 bg-white">
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 sm:mb-4 md:mb-6 lg:mb-8">تبرعك يصنع مستقبلاً</h2>
