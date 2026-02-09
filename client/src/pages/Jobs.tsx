@@ -6,6 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, Briefcase } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -19,7 +20,8 @@ export default function Jobs() {
       email: "",
       phone: "",
       experience: "",
-      qualifications: "",
+      qualifications: undefined,
+      skills: "",
       cvUrl: "",
     },
   });
@@ -118,9 +120,36 @@ export default function Jobs() {
                   name="qualifications"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-black">المؤهلات العلمية</FormLabel>
+                      <FormLabel className="text-black">المؤهل العلمي</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="h-12 bg-white border-gray-300 text-black">
+                            <SelectValue placeholder="اختر المؤهل العلمي" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="ابتدائي">ابتدائي</SelectItem>
+                          <SelectItem value="متوسط">متوسط</SelectItem>
+                          <SelectItem value="ثانوي">ثانوي</SelectItem>
+                          <SelectItem value="دبلوم">دبلوم</SelectItem>
+                          <SelectItem value="بكالوريوس">بكالوريوس</SelectItem>
+                          <SelectItem value="ماجستير">ماجستير</SelectItem>
+                          <SelectItem value="دكتوراه">دكتوراه</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="skills"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black">المهارات</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="اذكر المؤهلات العلمية والدورات التدريبية..." className="min-h-[100px] bg-white border-gray-300 text-black" {...field} />
+                        <Textarea placeholder="اذكر مهاراتك (مثال: مهارات الحاسوب، التواصل، القيادة...)" className="min-h-[100px] bg-white border-gray-300 text-black" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

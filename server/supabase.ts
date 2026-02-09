@@ -29,6 +29,47 @@ function normalizeEmail(email?: string) {
   return (email || "").toLowerCase();
 }
 
+const ALL_EMPLOYEE_PERMISSIONS = [
+  "beneficiaries:view",
+  "jobs:view",
+  "contact:view",
+  "analytics:view",
+  "employees:add",
+  "employees:remove",
+  "employees:edit",
+  "manage_donors",
+  "audit:view",
+];
+
+function getOwnerEmail() {
+  return normalizeEmail(process.env.PRESIDENT_EMAIL || process.env.HEAD_EMAIL || "bedaihsa@gmail.com");
+}
+
+async function ensureOwnerFullPermissions() {
+  const ownerEmail = getOwnerEmail();
+  if (!ownerEmail) return;
+  const t = await readTable("employees");
+  const matches = t.filter((e: any) => normalizeEmail(e.email) === ownerEmail);
+  if (matches.length === 0) return;
+
+  const primary = matches[0];
+  const mergedPermissions = Array.from(
+    new Set([...(primary.permissions || []), ...ALL_EMPLOYEE_PERMISSIONS])
+  );
+
+  const normalized = {
+    ...primary,
+    email: ownerEmail,
+    role: "president",
+    active: true,
+    permissions: mergedPermissions,
+  };
+
+  const filtered = t.filter((e: any) => normalizeEmail(e.email) !== ownerEmail);
+  filtered.unshift(normalized);
+  await writeTable("employees", filtered);
+}
+
 // Use local JSON adapter only. Supabase integration removed for local development.
 const useSupabase = false;
 
@@ -150,13 +191,40 @@ export async function getBeneficiariesCount() {
 }
 
 export async function getRecentBeneficiaries(limit = 10) {
-  const t = await readTable("beneficiaries");
-  return t.sort((a: any, b: any) => (b.created_at || "").localeCompare(a.created_at || "")).slice(0, limit);
+  try {
+    const t = await readTable("beneficiaries");
+    if (!Array.isArray(t)) return [];
+    
+    return t
+      .sort((a: any, b: any) => {
+        const dateA = new Date(a.created_at || a.createdAt || 0).getTime();
+        const dateB = new Date(b.created_at || b.createdAt || 0).getTime();
+        return dateB - dateA;
+      })
+      .slice(0, limit)
+      .filter((item: any) => item && typeof item === 'object')
+      .map((item: any) => {
+        return {
+          id: String(item.id || ''),
+          fullName: String(item.full_name || item.fullName || ''),
+          nationalId: String(item.national_id || item.nationalId || ''),
+          address: String(item.address || ''),
+          phone: String(item.phone || ''),
+          email: String(item.email || ''),
+          assistanceType: String(item.assistance_type || item.assistanceType || ''),
+          createdAt: String(item.created_at || item.createdAt || ''),
+          type: 'beneficiary'
+        };
+      });
+  } catch (err) {
+    console.error("Error in getRecentBeneficiaries:", err);
+    return [];
+  }
 }
 
 export async function createJobApplication(application: any) {
   const t = await readTable("job_applications");
-  const rec = { id: randomUUID(), full_name: application.fullName, email: application.email, phone: application.phone, experience: application.experience, qualifications: application.qualifications, cv_url: application.cvUrl, created_at: new Date().toISOString() };
+  const rec = { id: randomUUID(), full_name: application.fullName, email: application.email, phone: application.phone, experience: application.experience, qualifications: application.qualifications, skills: application.skills, cv_url: application.cvUrl, created_at: new Date().toISOString() };
   t.push(rec);
   await writeTable("job_applications", t);
   return rec;
@@ -168,13 +236,39 @@ export async function getJobApplicationsCount() {
 }
 
 export async function getRecentJobApplications(limit = 10) {
-  const t = await readTable("job_applications");
-  return t.sort((a: any, b: any) => (b.created_at || "").localeCompare(a.created_at || "")).slice(0, limit);
+  try {
+    const t = await readTable("job_applications");
+    if (!Array.isArray(t)) return [];
+    
+    return t
+      .sort((a, b) => {
+        const dateA = new Date(a.created_at || a.createdAt || 0).getTime();
+        const dateB = new Date(b.created_at || b.createdAt || 0).getTime();
+        return dateB - dateA;
+      })
+      .slice(0, limit)
+      .filter((item) => item && typeof item === 'object')
+      .map((item) => ({
+        id: String(item.id || ''),
+        fullName: String(item.full_name || item.fullName || ''),
+        email: String(item.email || ''),
+        phone: String(item.phone || ''),
+        experience: String(item.experience || ''),
+        qualifications: String(item.qualifications || ''),
+        skills: String(item.skills || ''),
+        cvUrl: String(item.cv_url || item.cvUrl || ''),
+        createdAt: String(item.created_at || item.createdAt || ''),
+        type: 'job'
+      }));
+  } catch (err) {
+    console.error("Error in getRecentJobApplications:", err);
+    return [];
+  }
 }
 
 export async function createContactMessage(message: any) {
   const t = await readTable("contact_messages");
-  const rec = { id: randomUUID(), name: message.name, email: message.email, message: message.message, created_at: new Date().toISOString() };
+  const rec = { id: randomUUID(), name: message.name, email: message.email, phone: message.phone, message: message.message, created_at: new Date().toISOString() };
   t.push(rec);
   await writeTable("contact_messages", t);
   return rec;
@@ -186,8 +280,31 @@ export async function getContactMessagesCount() {
 }
 
 export async function getRecentContactMessages(limit = 10) {
-  const t = await readTable("contact_messages");
-  return t.sort((a: any, b: any) => (b.created_at || "").localeCompare(a.created_at || "")).slice(0, limit);
+  try {
+    const t = await readTable("contact_messages");
+    if (!Array.isArray(t)) return [];
+    
+    return t
+      .sort((a, b) => {
+        const dateA = new Date(a.created_at || a.createdAt || 0).getTime();
+        const dateB = new Date(b.created_at || b.createdAt || 0).getTime();
+        return dateB - dateA;
+      })
+      .slice(0, limit)
+      .filter((item) => item && typeof item === 'object')
+      .map((item) => ({
+        id: String(item.id || ''),
+        name: String(item.name || ''),
+        email: String(item.email || ''),
+        phone: String(item.phone || ''),
+        message: String(item.message || ''),
+        createdAt: String(item.created_at || item.createdAt || ''),
+        type: 'contact'
+      }));
+  } catch (err) {
+    console.error("Error in getRecentContactMessages:", err);
+    return [];
+  }
 }
 
 export async function createVolunteer(volunteer: any) {
@@ -198,9 +315,49 @@ export async function createVolunteer(volunteer: any) {
   return rec;
 }
 
+export async function getVolunteersCount() {
+  const t = await readTable("volunteers");
+  return t.length;
+}
+
+export async function getRecentVolunteers(limit = 10) {
+  try {
+    const t = await readTable("volunteers");
+    if (!Array.isArray(t)) return [];
+    
+    return t
+      .sort((a, b) => {
+        const dateA = new Date(a.created_at || a.createdAt || 0).getTime();
+        const dateB = new Date(b.created_at || b.createdAt || 0).getTime();
+        return dateB - dateA;
+      })
+      .slice(0, limit)
+      .filter((item) => item && typeof item === 'object')
+      .map((item) => ({
+        id: String(item.id || ''),
+        name: String(item.name || ''),
+        email: String(item.email || ''),
+        phone: String(item.phone || ''),
+        experience: String(item.experience || ''),
+        opportunityTitle: String(item.opportunity_title || item.opportunityTitle || ''),
+        createdAt: String(item.created_at || item.createdAt || ''),
+        type: 'volunteer'
+      }));
+  } catch (err) {
+    console.error("Error in getRecentVolunteers:", err);
+    return [];
+  }
+}
+
 export async function getEmployeeByEmail(email: string) {
   const t = await readTable("employees");
-  return t.find((e: any) => normalizeEmail(e.email) === normalizeEmail(email));
+  const ownerEmail = getOwnerEmail();
+  const normalized = normalizeEmail(email);
+  if (normalized && normalized === ownerEmail) {
+    await ensureOwnerFullPermissions();
+  }
+  const refreshed = normalized === ownerEmail ? await readTable("employees") : t;
+  return refreshed.find((e: any) => normalizeEmail(e.email) === normalized);
 }
 
 export async function getAllEmployees() {
@@ -232,9 +389,10 @@ export async function deleteEmployee(id: string) {
   await writeTable("employees", remaining);
   return true;
 }
-export async function storeOTPToken(email: string, code: string, expiresAt: Date) {
+export async function storeOTPToken(email: string, code: string, expiresAt: Date, metadata?: any) {
   const t = await readTable("otp_tokens");
-  const rec = { id: randomUUID(), email: normalizeEmail(email), code, expires_at: expiresAt.toISOString(), used: false, created_at: new Date().toISOString() };
+  const rec: any = { id: randomUUID(), email: normalizeEmail(email), code, expires_at: expiresAt.toISOString(), used: false, created_at: new Date().toISOString() };
+  if (metadata) rec.metadata = metadata;
   t.push(rec);
   await writeTable("otp_tokens", t);
   return rec;
@@ -252,11 +410,14 @@ export async function verifyOTPToken(email: string, code: string) {
 }
 
 export async function ensurePresidentExists() {
-  const presidentEmail = process.env.PRESIDENT_EMAIL || process.env.HEAD_EMAIL;
+  const presidentEmail = getOwnerEmail();
   if (!presidentEmail) return;
 
   const existing = await getEmployeeByEmail(presidentEmail);
-  if (existing) return;
+  if (existing) {
+    await ensureOwnerFullPermissions();
+    return;
+  }
 
   const presidentId = `${Date.now()}-president`;
   await createEmployee({
@@ -267,7 +428,7 @@ export async function ensurePresidentExists() {
     phone: "",
     notes: "حساب الرئيس - تم إنشاؤه تلقائياً",
     active: true,
-    permissions: ["*"],
+    permissions: ALL_EMPLOYEE_PERMISSIONS,
   });
 
   console.log(`✅ تم إنشاء حساب الرئيس: ${presidentEmail}`);

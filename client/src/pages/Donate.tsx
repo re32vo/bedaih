@@ -247,7 +247,7 @@ export default function Donate() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="space-y-2"
+            className="space-y-8"
           >
             <div className="text-center">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2">اختر طريقة الدفع</h2>
@@ -328,13 +328,13 @@ export default function Donate() {
                   </div>
                 )}
                 {selectedMethodObj.id === 2 && (
-                  <div className="text-center py-6">
+                  <div className="text-center py-8">
                     <div className="text-5xl mb-4">💳</div>
                     <p className="text-slate-700 text-lg">سيتم تحويلك لبوابة الدفع الآمنة لإتمام العملية</p>
                   </div>
                 )}
                 {selectedMethodObj.id === 3 && (
-                  <div className="text-center py-6">
+                  <div className="text-center py-8">
                     <img 
                       src="/ap.jpg" 
                       alt="Apple Pay" 
@@ -346,23 +346,24 @@ export default function Donate() {
               </motion.div>
             )}
 
-            <div className="flex flex-col items-center gap-3 w-full -mt-6">
+            <div className="flex gap-3 max-w-md mx-auto">
               <Button
                 onClick={() => {
                   setShowPaymentMethods(false);
                   setSelectedMethod(null);
                 }}
                 variant="outline"
-                className="px-6 py-3 w-40"
+                className="flex-1"
               >
                 إلغاء
               </Button>
               <Button
                 onClick={handleCompletePayment}
                 disabled={!selectedMethod}
-                className="w-64 px-6 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-lg shadow-lg text-xl font-extrabold"
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white"
               >
-                <span className="block w-full text-center leading-none">تأكيد التبرع</span>
+                <Heart className="w-4 h-4 ml-2" />
+                تأكيد التبرع
               </Button>
             </div>
           </motion.div>

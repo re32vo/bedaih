@@ -1,6 +1,7 @@
 
 import type { Express } from "express";
 import type { Server } from "http";
+import { randomBytes } from "crypto";
 import { api } from "@shared/routes";
 import { z } from "zod";
 import {
@@ -13,6 +14,7 @@ import {
   escapeHtml,
 } from "./email";
 import { logAuditEntry, getAuditEntries } from "./audit";
+import { sendSMS } from "./sms";
 import { generateOTP, storeToken, verifyToken, isOTPRequestRateLimited, trackOTPRequest, storeOTP, verifyOTP, invalidateToken } from "./otp";
 import { Logger } from "./logger";
 import {
@@ -34,6 +36,8 @@ import {
   getContactMessagesCount,
   getRecentContactMessages,
   createVolunteer,
+  getVolunteersCount,
+  getRecentVolunteers,
   getEmployeeByEmail,
   getAllEmployees,
   createEmployee,
@@ -71,6 +75,18 @@ export async function registerRoutes(
       const input = api.beneficiaries.create.input.parse(req.body);
       const beneficiary = await createBeneficiary(input);
       
+      // Log audit entry
+      logAuditEntry({
+        actor: `مستفيد: ${input.email}`,
+        action: "create_beneficiary",
+        details: {
+          fullName: input.fullName,
+          email: input.email,
+          phone: input.phone,
+          assistanceType: input.assistanceType,
+        }
+      });
+      
       // Send confirmation email to applicant
       await sendEmail(
         input.email,
@@ -102,6 +118,18 @@ export async function registerRoutes(
     try {
       const input = api.jobs.create.input.parse(req.body);
       const application = await createJobApplication(input);
+      
+      // Log audit entry
+      logAuditEntry({
+        actor: `متقدم وظيفة: ${input.email}`,
+        action: "create_job",
+        details: {
+          fullName: input.fullName,
+          email: input.email,
+          phone: input.phone,
+          qualifications: input.qualifications,
+        }
+      });
       
       // Send confirmation email to applicant
       await sendEmail(
@@ -135,6 +163,17 @@ export async function registerRoutes(
       const input = api.contact.create.input.parse(req.body);
       const message = await createContactMessage(input);
       
+      // Log audit entry
+      logAuditEntry({
+        actor: `مراسل: ${input.email}`,
+        action: "create_contact",
+        details: {
+          name: input.name,
+          email: input.email,
+          phone: input.phone,
+        }
+      });
+      
       // Send confirmation email to sender
       await sendEmail(
         input.email,
@@ -166,6 +205,18 @@ export async function registerRoutes(
     try {
       const input = api.volunteers.create.input.parse(req.body);
       const volunteer = await createVolunteer(input);
+      
+      // Log audit entry
+      logAuditEntry({
+        actor: `متطوع: ${input.email}`,
+        action: "create_volunteer",
+        details: {
+          name: input.name,
+          email: input.email,
+          phone: input.phone,
+          opportunityTitle: input.opportunityTitle,
+        }
+      });
       
       // Send confirmation email to volunteer
       await sendEmail(
@@ -215,6 +266,18 @@ export async function registerRoutes(
         phone: input.phone,
         experience: input.experience,
         opportunityTitle: input.opportunityTitle,
+      });
+      
+      // Log audit entry
+      logAuditEntry({
+        actor: `متطوع: ${input.email}`,
+        action: "create_volunteer",
+        details: {
+          name: input.name,
+          email: input.email,
+          phone: input.phone,
+          opportunityTitle: input.opportunityTitle,
+        }
       });
       
       // Send confirmation email
@@ -273,7 +336,7 @@ export async function registerRoutes(
   }
 
   function hasPermission(user: any, perm: string) {
-    return user?.role === "president" || (Array.isArray(user?.permissions) && user.permissions.includes(perm));
+    return user?.role === "president" || (Array.isArray(user?.permissions) && (user.permissions.includes(perm) || user.permissions.includes("*")));
   }
 
   // Employees: add (employees:add or president)
@@ -301,7 +364,7 @@ export async function registerRoutes(
       const presidentEmail = process.env.PRESIDENT_EMAIL || process.env.HEAD_EMAIL;
       if (input.role === "president" && presidentEmail) {
         const employees = await getAllEmployees();
-        const existingPresident = employees.find(e => e.role === "president");
+        const existingPresident = employees.find((e: any) => e.role === "president");
         if (existingPresident) {
           return res.status(403).json({ 
             message: "لا يمكن تعيين رئيس ثانٍ - يوجد رئيس واحد فقط في النظام وهو: " + existingPresident.name 
@@ -370,7 +433,7 @@ export async function registerRoutes(
       const data = schema.parse(req.body);
       // السماح للرئيس بتعديل بياناته، ومنع الآخرين من تعديل الرئيس
       const allEmployees = await getAllEmployees();
-      const target = allEmployees.find(e => e.id === req.params.id);
+      const target = allEmployees.find((e: any) => e.id === req.params.id);
       
       // منع جميع الموظفين (غير الرئيس) من تعديل بيانات أنفسهم تماماً
       const isSelfEdit = target?.email.toLowerCase() === user.email.toLowerCase();
@@ -383,7 +446,7 @@ export async function registerRoutes(
       
       // منع تعيين رئيس ثانٍ - يجب أن يكون رئيس واحد فقط (فقط إذا كان هناك رئيس بالفعل)
       if (data.role === "president" && target?.role !== "president" && presidentEmail) {
-        const existingPresident = allEmployees.find(e => e.role === "president");
+        const existingPresident = allEmployees.find((e: any) => e.role === "president");
         if (existingPresident) {
           return res.status(403).json({ 
             message: "لا يمكن تعيين رئيس ثانٍ - يوجد رئيس واحد فقط في النظام: " + existingPresident.name 
@@ -418,7 +481,7 @@ export async function registerRoutes(
         return res.status(403).json({ message: "صلاحية غير كافية للفصل" });
       }
       const employees = await getAllEmployees();
-      const targetEmployee = employees.find(e => e.id === req.params.id);
+      const targetEmployee = employees.find((e: any) => e.id === req.params.id);
       
       // منع الموظف من حذف نفسه
       if (targetEmployee?.email.toLowerCase() === user.email.toLowerCase()) {
@@ -440,7 +503,7 @@ export async function registerRoutes(
       logAuditEntry({
         actor: user.email,
         action: "delete_employee",
-        details: { id: req.params.id, email: removed.email },
+        details: { id: req.params.id, email: targetEmployee?.email },
       });
       res.json({ success: true, message: "تم فصل الموظف بنجاح" });
     } catch (err) {
@@ -477,9 +540,48 @@ export async function registerRoutes(
     }
   });
 
+  const otpLoginDisabled = process.env.DISABLE_OTP_LOGIN !== "false";
+
+  // Employee Login - Direct Login (temporary while OTP disabled)
+  app.post("/api/auth/direct-login", async (req, res) => {
+    try {
+      const rawEmail = req.body.email;
+      const email = typeof rawEmail === "string" ? rawEmail.trim().toLowerCase() : rawEmail;
+
+      if (!email || typeof email !== "string") {
+        return res.status(400).json({ message: "البريد الإلكتروني مطلوب" });
+      }
+
+      const employee = await getEmployeeByEmail(email);
+      if (!employee || employee.active === false) {
+        return res.status(403).json({ message: "الموظف غير مفعّل" });
+      }
+
+      const token = randomBytes(32).toString('hex');
+      storeToken(token, email);
+
+      logAuditEntry({
+        actor: employee.email,
+        action: "direct_login",
+        details: { method: "direct" },
+      });
+
+      res.json({
+        success: true,
+        token,
+        message: "تم تسجيل الدخول بنجاح",
+      });
+    } catch (err) {
+      res.status(500).json({ message: "حدث خطأ أثناء تسجيل الدخول" });
+    }
+  });
+
   // Employee Login - Send OTP Code
   app.post("/api/auth/send-otp", async (req, res) => {
     try {
+      if (otpLoginDisabled) {
+        return res.status(403).json({ message: "تم تعطيل تسجيل الدخول المؤقت حالياً" });
+      }
       const rawEmail = req.body.email;
       const email = typeof rawEmail === "string" ? rawEmail.trim().toLowerCase() : rawEmail;
       
@@ -577,6 +679,9 @@ export async function registerRoutes(
   // Employee Login - Verify OTP and login
   app.post("/api/auth/verify-otp", async (req, res) => {
     try {
+      if (otpLoginDisabled) {
+        return res.status(403).json({ message: "تم تعطيل تسجيل الدخول المؤقت حالياً" });
+      }
       const rawEmail = req.body.email;
       const email = typeof rawEmail === "string" ? rawEmail.trim().toLowerCase() : rawEmail;
       const code = req.body.code;
@@ -651,30 +756,68 @@ export async function registerRoutes(
     }
   });
 
-  // Verify Token and get employee info
+  // Test endpoint - Get token for testing  
+  app.post("/api/test-token", async (req, res) => {
+    try {
+      const email = req.body.email || "bedaihsa@gmail.com";
+      const employee = await getEmployeeByEmail(email);
+      if (!employee) {
+        return res.status(404).json({ message: "الموظف غير موجود" });
+      }
+
+      const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      storeToken(token, email);
+
+      res.json({
+        success: true,
+        token,
+        email: employee.email,
+        name: employee.name,
+        role: employee.role,
+        permissions: employee.permissions || [],
+        message: "Token created for testing",
+      });
+    } catch (err) {
+      res.status(500).json({ message: "Error creating test token" });
+    }
+  });
+
   app.post("/api/auth/verify-token", async (req, res) => {
     try {
       const authHeader = req.headers.authorization;
+      console.log(`[/api/auth/verify-token] Authorization header present: ${!!authHeader}`);
+      
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        console.log("[/api/auth/verify-token] No Bearer token provided");
         return res.status(401).json({ message: "غير مصرح" });
       }
 
       const token = authHeader.substring(7);
+      console.log(`[/api/auth/verify-token] Token extracted: ${token.substring(0, 10)}...`);
+      
       if (!token) {
+        console.log("[/api/auth/verify-token] Token is empty");
         return res.status(401).json({ message: "رابط غير صحيح" });
       }
 
       // Verify token and get email
       const email = verifyToken(token);
+      console.log(`[/api/auth/verify-token] Email from token: ${email}`);
+      
       if (!email) {
+        console.log("[/api/auth/verify-token] Token verification failed");
         return res.status(401).json({ message: "التوكين غير صحيح أو انتهى" });
       }
 
       const employee = await getEmployeeByEmail(email);
+      console.log(`[/api/auth/verify-token] Employee found: ${!!employee}, active: ${employee?.active}`);
+      
       if (!employee || !employee.active) {
+        console.log("[/api/auth/verify-token] Employee not found or inactive");
         return res.status(403).json({ message: "الموظف غير مفعّل" });
       }
       
+      console.log(`[/api/auth/verify-token] Success for ${employee.email}`);
       res.json({ 
         success: true,
         email: employee.email,
@@ -684,6 +827,7 @@ export async function registerRoutes(
         message: "تم التحقق بنجاح"
       });
     } catch (err) {
+      console.error("[/api/auth/verify-token] Error:", err);
       res.status(401).json({ message: "فشل التحقق" });
     }
   });
@@ -711,12 +855,14 @@ export async function registerRoutes(
       const beneficiariesCount = await getBeneficiariesCount();
       const jobApplicationsCount = await getJobApplicationsCount();
       const contactMessagesCount = await getContactMessagesCount();
+      const volunteersCount = await getVolunteersCount();
 
       res.json({
         beneficiaries: beneficiariesCount,
         jobs: jobApplicationsCount,
         contacts: contactMessagesCount,
-        total: beneficiariesCount + jobApplicationsCount + contactMessagesCount,
+        volunteers: volunteersCount,
+        total: beneficiariesCount + jobApplicationsCount + contactMessagesCount + volunteersCount,
       });
     } catch (err) {
       logger.error("Dashboard stats error", err);
@@ -747,11 +893,13 @@ export async function registerRoutes(
       const recentBeneficiaries = await getRecentBeneficiaries(limit);
       const recentJobs = await getRecentJobApplications(limit);
       const recentContacts = await getRecentContactMessages(limit);
+      const recentVolunteers = await getRecentVolunteers(limit);
 
       res.json({
         beneficiaries: recentBeneficiaries,
         jobs: recentJobs,
         contacts: recentContacts,
+        volunteers: recentVolunteers,
       });
     } catch (err) {
       logger.error("Dashboard recent error", err);
@@ -760,14 +908,46 @@ export async function registerRoutes(
   });
 
   // Audit log - requires 'audit:view' permission (or HEAD_KEY override)
-  app.get("/api/audit", (req, res) => {
-    const headKey = process.env.HEAD_KEY;
-    const provided = req.headers["x-head-key"];    
+  app.get("/api/audit", async (req, res) => {
+    try {
+      const headKey = process.env.HEAD_KEY;
+      const provided = req.headers["x-head-key"];    
 
-    // Allow secret key override for ops
-    if (headKey && provided === headKey) {
-      const limit = Number(req.query.limit || 100);
-      const raw = getAuditEntries(limit > 0 && limit <= 500 ? limit : 100);
+      // Allow secret key override for ops
+      if (headKey && provided === headKey) {
+        const limit = Number(req.query.limit || 1000);
+        const raw = getAuditEntries(limit > 0 && limit <= 5000 ? limit : 1000);
+
+        // Optional filters: action, from, to (ISO or parseable date)
+        const action = (req.query.action as string | undefined)?.trim();
+        const from = (req.query.from as string | undefined)?.trim();
+        const to = (req.query.to as string | undefined)?.trim();
+
+        const fromTime = from ? Date.parse(from) : undefined;
+        const toTime = to ? Date.parse(to) : undefined;
+
+        const entries = raw.filter((e) => {
+          const t = Date.parse(e.timestamp);
+          const actionOk = action ? e.action === action : true;
+          const fromOk = fromTime ? t >= fromTime : true;
+          const toOk = toTime ? t <= toTime : true;
+          return actionOk && fromOk && toOk;
+        });
+
+        return res.json({ entries });
+      }
+
+      // Otherwise require authenticated employee with 'audit:view'
+      const user = await requireAuth(req as any, res as any);
+      if (!user) return;
+      
+      const hasAuditPermission = user.role === "president" || (Array.isArray(user.permissions) && user.permissions.includes("audit:view"));
+      if (!hasAuditPermission) {
+        return res.status(403).json({ message: "غير مصرح" });
+      }
+
+      const limit = Number(req.query.limit || 1000);
+      const raw = getAuditEntries(limit > 0 && limit <= 5000 ? limit : 1000);
 
       // Optional filters: action, from, to (ISO or parseable date)
       const action = (req.query.action as string | undefined)?.trim();
@@ -785,36 +965,11 @@ export async function registerRoutes(
         return actionOk && fromOk && toOk;
       });
 
-      return res.json({ entries });
+      res.json({ entries });
+    } catch (err) {
+      console.error("Error in /api/audit:", err);
+      res.status(500).json({ message: "خطأ في جلب السجلات", entries: [] });
     }
-
-    // Otherwise require authenticated employee with 'audit:view'
-    const user = requireAuth(req as any, res as any);
-    if (!user) return;
-    if (!hasPermission(user, "audit:view")) {
-      return res.status(403).json({ message: "غير مصرح" });
-    }
-
-    const limit = Number(req.query.limit || 100);
-    const raw = getAuditEntries(limit > 0 && limit <= 500 ? limit : 100);
-
-    // Optional filters: action, from, to (ISO or parseable date)
-    const action = (req.query.action as string | undefined)?.trim();
-    const from = (req.query.from as string | undefined)?.trim();
-    const to = (req.query.to as string | undefined)?.trim();
-
-    const fromTime = from ? Date.parse(from) : undefined;
-    const toTime = to ? Date.parse(to) : undefined;
-
-    const entries = raw.filter((e) => {
-      const t = Date.parse(e.timestamp);
-      const actionOk = action ? e.action === action : true;
-      const fromOk = fromTime ? t >= fromTime : true;
-      const toOk = toTime ? t <= toTime : true;
-      return actionOk && fromOk && toOk;
-    });
-
-    res.json({ entries });
   });
 
   // Employee Dashboard (Protected)
@@ -906,12 +1061,10 @@ export async function registerRoutes(
       // Generate OTP code
       const otp = generateOTP();
       
-      // Store OTP with user data for registration
-      if (!isLogin) {
-        storeOTP(normalizedEmail, otp, 10, { name: name.trim(), phone: phone.trim(), isRegistration: true }); // 10 minutes for registration
-      } else {
-        storeOTP(normalizedEmail, otp, 5); // 5 minutes for login
-      }
+      // Store OTP token in persistent storage (same behavior as employee OTP)
+      const expiresAt = new Date(Date.now() + (isLogin ? 5 : 10) * 60 * 1000);
+      const metadata = !isLogin ? { name: name ? name.trim() : "", phone: phone ? phone.trim() : "", isRegistration: true } : undefined;
+      await storeOTPToken(normalizedEmail, otp, expiresAt, metadata);
 
       const safeName = escapeHtml(name || 'عزيزنا المتبرع');
       const emailHtml = `
@@ -974,10 +1127,18 @@ export async function registerRoutes(
         details: { expiresIn: `${isLogin ? '5' : '10'} دقائق` },
       });
 
-      res.json({ 
+      const responsePayload: any = {
         message: "تم إرسال كود التحقق إلى بريدك الإلكتروني",
         expiresIn: `${isLogin ? '5' : '10'} دقائق`
-      });
+      };
+
+      // For local testing or explicit request, include the OTP code in the response
+      const revealRequested = Boolean(req.body?.revealCode) || process.env.INTERNAL_OTP_DISPLAY === "true";
+      if (revealRequested) {
+        responsePayload.code = otp;
+      }
+
+      res.json(responsePayload);
     } catch (err) {
       logger.error("Donor OTP error", err);
       res.status(500).json({ message: "حدث خطأ أثناء إرسال كود التحقق" });
@@ -994,24 +1155,22 @@ export async function registerRoutes(
       }
 
       const normalizedEmail = email.trim().toLowerCase();
-      const otpData = verifyOTP(normalizedEmail, code);
-      if (!otpData) {
+      const tokenRecord = await verifyOTPToken(normalizedEmail, code);
+      if (!tokenRecord) {
         return res.status(401).json({ message: "كود التحقق غير صحيح أو انتهى" });
       }
 
-      const isRegistration = Boolean((otpData as any)?.isRegistration);
-      
-      // For registration, get data from OTP
-      // For login, only update last login time
+      const isRegistration = Boolean((tokenRecord as any)?.metadata?.isRegistration);
+
+      // Prepare donor data
       let donorData: any = {
         email: normalizedEmail,
         lastLogin: true,
       };
-      
+
       if (isRegistration) {
-        // Only include name and phone for new registrations
-        donorData.name = (otpData as any)?.name || "";
-        donorData.phone = (otpData as any)?.phone || "";
+        donorData.name = (tokenRecord as any)?.metadata?.name || "";
+        donorData.phone = (tokenRecord as any)?.metadata?.phone || "";
       }
       
       // Save to database
@@ -1060,22 +1219,38 @@ export async function registerRoutes(
   app.post("/api/donors/login", async (req, res) => {
     try {
       const { email } = req.body;
-      
+      const normalizedEmail = (email || "").toString().trim().toLowerCase();
+
       // Log the login in audit log
       logAuditEntry({
-        actor: `متبرع: ${email}`,
+        actor: `متبرع: ${normalizedEmail}`,
         action: "تسجيل دخول متبرع",
         details: {
-          email,
+          email: normalizedEmail,
           type: "donor_login"
         }
       });
+
+      // Best-effort: send SMS notification to donor if phone exists
+      (async () => {
+        try {
+          const donor = await getDonorByEmail(normalizedEmail);
+          if (donor && donor.phone) {
+            const safeName = donor.name || "متبرع";
+            const message = `مرحباً ${safeName}، تم تسجيل دخولك بنجاح إلى حسابك في جمعية بَدَائِح. شكراً لكونك معنا.`;
+            await sendSMS(donor.phone, message);
+          }
+        } catch (smsErr) {
+          logger.error("Failed to send SMS after donor login", smsErr);
+        }
+      })();
 
       res.status(200).json({ 
         success: true,
         message: "تم تسجيل الدخول بنجاح"
       });
     } catch (err) {
+      logger.error("Donor login error", err);
       res.status(500).json({ message: "خطأ في تسجيل الدخول" });
     }
   });
@@ -1195,7 +1370,7 @@ export async function registerRoutes(
           email: donor.email,
           phone: donor.phone
         },
-        donations: donations.map(d => ({
+        donations: donations.map((d: any) => ({
           id: d.id.toString(),
           amount: d.amount,
           date: d.createdAt ? (typeof d.createdAt === 'string' ? d.createdAt.split('T')[0] : new Date(d.createdAt).toISOString().split('T')[0]) : new Date().toISOString().split('T')[0],
@@ -1203,9 +1378,9 @@ export async function registerRoutes(
           code: d.code
         })),
         stats: {
-          totalDonations: donations.reduce((sum, d) => sum + d.amount, 0),
+          totalDonations: donations.reduce((sum: number, d: any) => sum + d.amount, 0),
           donationCount: donations.length,
-          avgDonation: donations.length > 0 ? Math.round(donations.reduce((sum, d) => sum + d.amount, 0) / donations.length) : 0
+          avgDonation: donations.length > 0 ? Math.round(donations.reduce((sum: number, d: any) => sum + d.amount, 0) / donations.length) : 0
         }
       });
     } catch (err) {
@@ -1489,12 +1664,12 @@ export async function registerRoutes(
       
       // Get donations count for each donor
       const donorsWithStats = await Promise.all(
-        donors.map(async (donor) => {
+        donors.map(async (donor: any) => {
           const donations = await getDonationsByEmail(donor.email);
           return {
             ...donor,
             donationsCount: donations.length,
-            totalDonations: donations.reduce((sum, d) => sum + d.amount, 0)
+            totalDonations: donations.reduce((sum: number, d: any) => sum + d.amount, 0)
           };
         })
       );

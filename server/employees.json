@@ -9,42 +9,36 @@
       "beneficiaries:view",
       "jobs:view",
       "contact:view",
+      "volunteers:view",
       "analytics:view",
       "employees:add",
       "employees:remove",
       "employees:edit",
+      "manage_donors",
       "audit:view"
     ],
-    "phone": ""
+    "phone": "0533170903"
   },
   {
-    "id": "1769419201365-snub0u",
-    "name": "محمد",
+    "id": "1770652674525-4qqc2a",
     "email": "mhmed666q@gmail.com",
-    "role": "staff",
-    "phone": "0533170903",
-    "notes": "",
+    "name": "محمد",
+    "role": "موظف ",
+    "phone": "0541516078",
+    "notes": null,
     "active": true,
     "permissions": [
-      "employees:edit",
-      "audit:view",
       "beneficiaries:view",
       "jobs:view",
       "contact:view",
+      "volunteers:view",
       "analytics:view",
       "employees:add",
-      "employees:remove"
-    ]
-  },
-  {
-    "id": "bedaih-1",
-    "name": "Bedaih Admin",
-    "email": "bedaihsa@gmail.com",
-    "role": "admin",
-    "phone": null,
-    "notes": "Created locally for development",
-    "active": true,
-    "permissions": ["*"],
-    "created_at": "2026-01-31T00:00:00.000Z"
+      "employees:remove",
+      "employees:edit",
+      "manage_donors",
+      "audit:view"
+    ],
+    "created_at": "2026-02-09T15:57:54.527Z"
   }
 ]

@@ -41,7 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   if (isEmployeePage || isDonorPage) return <div className="min-h-screen font-body rtl" dir="rtl">{children}</div>;
 
   return (
-    <div className="min-h-screen font-body flex flex-col rtl bg-white dark:bg-slate-900" dir="rtl">
+    <div className="min-h-screen font-body flex flex-col rtl bg-slate-900" dir="rtl">
       <header className="sticky top-0 z-40 bg-white dark:bg-slate-900 shadow-sm border-b border-slate-200 dark:border-slate-800">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/">
@@ -120,9 +120,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         )}
       </AnimatePresence>
 
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow bg-white">{children}</main>
 
-      <footer className="bg-slate-900 text-slate-200 border-t-2 border-slate-800 mt-8">
+      <footer className="bg-slate-900 text-slate-200 mt-0">
         <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>

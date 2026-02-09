@@ -36,9 +36,12 @@ export const insertJobApplicationSchema = z.object({
   experience: z.string()
     .min(5, "وصف الخبرة قصير جداً")
     .max(1000, "وصف الخبرة طويل جداً"),
-  qualifications: z.string()
-    .min(5, "وصف المؤهلات قصير جداً")
-    .max(1000, "وصف المؤهلات طويل جداً"),
+  qualifications: z.enum(["ابتدائي", "متوسط", "ثانوي", "دبلوم", "بكالوريوس", "ماجستير", "دكتوراه"], {
+    errorMap: () => ({ message: "الرجاء اختيار المؤهل العلمي" }),
+  }),
+  skills: z.string()
+    .min(3, "المهارات قصيرة جداً")
+    .max(500, "المهارات طويلة جداً"),
   email: z.string()
     .email("البريد الإلكتروني غير صحيح")
     .toLowerCase(),
@@ -64,6 +67,8 @@ export const insertContactMessageSchema = z.object({
   email: z.string()
     .email("البريد الإلكتروني غير صحيح")
     .toLowerCase(),
+  phone: z.string()
+    .regex(/^[0-9]{9,15}$/, "رقم الهاتف غير صحيح"),
   message: z.string()
     .min(10, "الرسالة قصيرة جداً")
     .max(2000, "الرسالة طويلة جداً"),

@@ -312,42 +312,13 @@ export default function DonorsManagement() {
           <h1 className="text-3xl font-bold text-slate-900">إدارة المتبرعين</h1>
         </div>
         <p className="text-slate-600">عرض وتعديل وحذف حسابات المتبرعين</p>
-      </div>
-
-      {/* Stats */}
-      <div className="grid md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-blue-700">إجمالي المتبرعين</p>
-              <p className="text-2xl font-bold text-blue-900">{donors.length}</p>
-            </div>
-            <Users className="w-10 h-10 text-blue-600/50" />
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 border border-green-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-green-700">إجمالي التبرعات</p>
-              <p className="text-2xl font-bold text-green-900">
-                {donors.reduce((sum, d) => sum + d.totalDonations, 0).toLocaleString()} ر.س
-              </p>
-            </div>
-            <Gift className="w-10 h-10 text-green-600/50" />
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 border border-purple-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-purple-700">عدد التبرعات</p>
-              <p className="text-2xl font-bold text-purple-900">
-                {donors.reduce((sum, d) => sum + d.donationsCount, 0)}
-              </p>
-            </div>
-            <TrendingUp className="w-10 h-10 text-purple-600/50" />
-          </div>
+        <div className="mt-4">
+          <Button
+            className="bg-black hover:bg-gray-800 text-white"
+            onClick={() => { window.location.href = "/dashboard"; }}
+          >
+            عودة للوحة الموظفين
+          </Button>
         </div>
       </div>
 

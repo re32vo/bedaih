@@ -63,6 +63,13 @@ export default function Logs() {
       });
   }, []);
 
+  // Fetch logs when filters change
+  useEffect(() => {
+    if (token && !loading) {
+      fetchLogs();
+    }
+  }, [action, from, to]);
+
   const actionsList = useMemo(() => {
     const set = new Set<string>();
     entries.forEach((e) => {
@@ -82,6 +89,9 @@ export default function Logs() {
     { label: "طلبات المساعدة", value: "create_beneficiary" },
     { label: "الطلبات الوظيفية", value: "create_job" },
     { label: "رسائل التواصل", value: "create_contact" },
+    { label: "طلبات المتطوعين", value: "create_volunteer" },
+    { label: "إدارة المتبرعين", value: "update_donor" },
+    { label: "حذف متبرع", value: "delete_donor" },
   ];
 
   const getActionText = (action: string) => {
@@ -95,6 +105,9 @@ export default function Logs() {
       create_beneficiary: "طلب مستفيد جديد",
       create_job: "طلب وظيفي جديد",
       create_contact: "رسالة تواصل جديدة",
+      create_volunteer: "طلب تطوع جديد",
+      update_donor: "تحديث بيانات متبرع",
+      delete_donor: "حذف متبرع",
     };
     return map[action] || action;
   };
@@ -119,13 +132,22 @@ export default function Logs() {
       return `تم الدخول بنجاح`;
     }
     if (action === "create_beneficiary") {
-      return `طلب مساعدة جديد`;
+      return `طلب مساعدة جديد - ${details.fullName || details.name || ""}`;
     }
     if (action === "create_job") {
-      return `طلب وظيفي جديد`;
+      return `طلب وظيفي جديد - ${details.fullName || details.name || ""}`;
     }
     if (action === "create_contact") {
-      return `رسالة تواصل جديدة`;
+      return `رسالة تواصل جديدة من ${details.name || ""}`;
+    }
+    if (action === "create_volunteer") {
+      return `طلب تطوع جديد - ${details.name || ""}`;
+    }
+    if (action === "update_donor") {
+      return `تحديث متبرع: ${details.email || details.name || ""}`;
+    }
+    if (action === "delete_donor") {
+      return `حذف متبرع: ${details.email || ""}`;
     }
     
     return getActionText(action);
@@ -154,9 +176,13 @@ export default function Logs() {
       if (res.ok) {
         const data = await res.json();
         setEntries(data.entries || []);
+      } else {
+        setEntries([]);
+        console.error("Failed to fetch logs:", res.status, res.statusText);
       }
     } catch (err) {
       console.error("Failed to fetch logs:", err);
+      setEntries([]);
     } finally {
       setFetching(false);
     }
@@ -166,7 +192,7 @@ export default function Logs() {
     setFetching(true);
     try {
       const params = new URLSearchParams();
-      params.set("limit", "200");
+      params.set("limit", "1000");
       if (action && action !== "all") params.set("action", action);
       if (from) params.set("from", toIso(from));
       if (to) params.set("to", toIso(to));
@@ -174,12 +200,18 @@ export default function Logs() {
       const res = await fetch(`/api/audit?${params.toString()}`, {
         headers: { Authorization: `Bearer ${sessionToken}` },
       });
+      
       if (res.ok) {
         const data = await res.json();
         setEntries(data.entries || []);
+      } else {
+        const errorText = await res.text();
+        console.error("Failed to fetch logs:", res.status, res.statusText);
+        setEntries([]);
       }
     } catch (err) {
       console.error("Failed to fetch logs:", err);
+      setEntries([]);
     } finally {
       setFetching(false);
     }
@@ -231,38 +263,38 @@ export default function Logs() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 py-6 sm:py-8 md:py-12 lg:py-16" dir="rtl">
+    <div className="min-h-screen bg-white text-black py-6 sm:py-8 md:py-12 lg:py-16" dir="rtl">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
           <div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2">سجلات النظام</h1>
-            <p className="text-xs sm:text-sm md:text-base text-white/80">عرض ومتابعة نشاط النظام حسب النوع والزمن</p>
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-1 sm:mb-2">سجلات النظام</h1>
+            <p className="text-xs sm:text-sm md:text-base text-black/80">عرض ومتابعة نشاط النظام حسب النوع والزمن</p>
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" onClick={() => navigate("/dashboard")} className="text-xs sm:text-sm text-white border-slate-700 hover:bg-slate-800">عودة للوحة التحكم</Button>
+            <Button variant="outline" onClick={() => navigate("/dashboard")} className="text-xs sm:text-sm text-black border-slate-200 hover:bg-slate-100">عودة للوحة التحكم</Button>
           </div>
         </div>
 
-        <Alert className="mb-4 bg-slate-900 border-slate-700">
+        <Alert className="mb-4 bg-white border-slate-200">
           <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-500" />
-          <AlertDescription className="text-xs sm:text-sm text-white/90">
+          <AlertDescription className="text-xs sm:text-sm text-black/90">
             هذه الصفحة مرئية لمن لديه صلاحية "عرض السجلات" أو للرئيس. يتم جلب السجلات عبر تفويض آمن.
           </AlertDescription>
         </Alert>
 
-        <Card className="mb-6 bg-slate-900 border-slate-700">
+        <Card className="mb-6 bg-white border-slate-200">
           <CardHeader className="pb-3 sm:pb-4">
-            <CardTitle className="text-base sm:text-lg text-white">عوامل التصفية</CardTitle>
+            <CardTitle className="text-base sm:text-lg text-black">عوامل التصفية</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 sm:space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-2 sm:gap-3">
               <div>
-                <label className="text-xs text-white/80 mb-1 block">نوع الحدث</label>
+                <label className="text-xs text-black/70 mb-1 block">نوع الحدث</label>
                 <Select value={action} onValueChange={(v) => setAction(v)}>
-                  <SelectTrigger className="bg-slate-800 border-slate-700 text-white">
+                  <SelectTrigger className="bg-white border-slate-300 text-black">
                     <SelectValue placeholder="اختر نوع الحدث" />
                   </SelectTrigger>
-                  <SelectContent className="bg-slate-800 border-slate-700">
+                  <SelectContent className="bg-white border-slate-300">
                     <SelectItem value="all">الكل</SelectItem>
                     {actionsList.map((a) => (
                       <SelectItem key={a} value={a}>{getActionText(a)}</SelectItem>
@@ -271,19 +303,19 @@ export default function Logs() {
                 </Select>
               </div>
               <div>
-                <label className="text-xs text-white/80 mb-1 block">من (تاريخ/وقت)</label>
-                <Input type="datetime-local" value={from} onChange={(e) => setFrom(e.target.value)} className="bg-slate-800 border-slate-700 text-white" />
+                <label className="text-xs text-black/70 mb-1 block">من (تاريخ/وقت)</label>
+                <Input type="datetime-local" value={from} onChange={(e) => setFrom(e.target.value)} className="bg-white border-slate-300 text-black" />
               </div>
               <div>
-                <label className="text-xs text-white/80 mb-1 block">إلى (تاريخ/وقت)</label>
-                <Input type="datetime-local" value={to} onChange={(e) => setTo(e.target.value)} className="bg-slate-800 border-slate-700 text-white" />
+                <label className="text-xs text-black/70 mb-1 block">إلى (تاريخ/وقت)</label>
+                <Input type="datetime-local" value={to} onChange={(e) => setTo(e.target.value)} className="bg-white border-slate-300 text-black" />
               </div>
               <div className="flex gap-2">
-                <Button className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => { setToken(sessionStorage.getItem("authToken")); setTimeout(fetchLogs, 0); }} disabled={fetching}>
+                <Button className="flex-1 bg-green-600 hover:bg-green-700 text-white" onClick={() => { setToken(sessionStorage.getItem("authToken")); setTimeout(fetchLogs, 0); }} disabled={fetching}>
                   <Filter className={`w-4 h-4 ml-2 ${fetching ? 'animate-spin' : ''}`} />
                   تطبيق التصفية
                 </Button>
-                <Button variant="outline" onClick={() => { setAction("all"); setFrom(""); setTo(""); setToken(sessionStorage.getItem("authToken")); setTimeout(fetchLogs, 0); }} className="text-white border-slate-700 hover:bg-slate-800">
+                <Button variant="outline" onClick={() => { setAction("all"); setFrom(""); setTo(""); setToken(sessionStorage.getItem("authToken")); setTimeout(fetchLogs, 0); }} className="text-black border-slate-300 hover:bg-slate-100">
                   مسح
                 </Button>
               </div>
@@ -298,17 +330,17 @@ export default function Logs() {
                     setAction(q.value);
                     setTimeout(fetchLogs, 0);
                   }}
-                  className={action === q.value ? "bg-slate-700 text-white border-white" : "text-white border-slate-700 hover:bg-slate-800"}
+                  className={action === q.value ? "bg-blue-600 text-white border-blue-600" : "text-black border-slate-300 hover:bg-slate-100"}
                 >
                   {q.label}
                 </Button>
               ))}
             </div>
             <div className="flex flex-wrap gap-2 mt-2">
-              <Button size="sm" variant="outline" onClick={() => setPreset("hour")} className="text-white border-slate-700 hover:bg-slate-800">
+              <Button size="sm" variant="outline" onClick={() => setPreset("hour")} className="text-black border-slate-300 hover:bg-slate-100">
                 آخر ساعة
               </Button>
-              <Button size="sm" variant="outline" onClick={() => setPreset("today")} className="text-white border-slate-700 hover:bg-slate-800">
+              <Button size="sm" variant="outline" onClick={() => setPreset("today")} className="text-black border-slate-300 hover:bg-slate-100">
                 اليوم
               </Button>
               <Button size="sm" variant="outline" onClick={() => {
@@ -316,7 +348,7 @@ export default function Logs() {
                 const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
                 setFrom(new Date(weekAgo.getTime() - weekAgo.getTimezoneOffset() * 60000).toISOString().slice(0, 16));
                 setTo(new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16));
-              }} className="text-white border-slate-700 hover:bg-slate-800">
+              }} className="text-black border-slate-300 hover:bg-slate-100">
                 آخر أسبوع
               </Button>
               <Button size="sm" variant="outline" onClick={() => {
@@ -324,23 +356,23 @@ export default function Logs() {
                 const monthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
                 setFrom(new Date(monthAgo.getTime() - monthAgo.getTimezoneOffset() * 60000).toISOString().slice(0, 16));
                 setTo(new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16));
-              }} className="text-white border-slate-700 hover:bg-slate-800">
+              }} className="text-black border-slate-300 hover:bg-slate-100">
                 آخر شهر
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-900 border-slate-700">
+        <Card className="bg-white border-slate-200">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
+            <CardTitle className="flex items-center gap-2 text-black">
               <FileText className="w-5 h-5" />
               السجلات ({entries.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
             {entries.length === 0 ? (
-              <div className="text-center py-10 text-white/80">
+              <div className="text-center py-10 text-black/60">
                 لا توجد سجلات مطابقة
               </div>
             ) : (
@@ -351,20 +383,20 @@ export default function Logs() {
                   const timeStr = date.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
                   
                   return (
-                    <div key={e.id} className="border rounded-lg p-4 bg-slate-800 hover:bg-slate-700 transition-colors border-slate-700">
+                    <div key={e.id} className="border rounded-lg p-4 bg-slate-50 hover:bg-slate-100 transition-colors border-slate-200">
                       <div className="space-y-2">
-                        <div className="flex items-center gap-2 text-xs text-white/80">
+                        <div className="flex items-center gap-2 text-xs text-black/60">
                           <span className="font-semibold">الزمن:</span>
                           <span>{dateStr}</span>
-                          <span className="text-emerald-500 font-bold">{timeStr}</span>
+                          <span className="text-blue-600 font-bold">{timeStr}</span>
                         </div>
                         <div className="flex items-center gap-2 text-sm">
-                          <span className="text-white/80 font-semibold">الفاعل:</span>
-                          <span className="text-white">{e.actor}</span>
+                          <span className="text-black/70 font-semibold">الفاعل:</span>
+                          <span className="text-black">{e.actor}</span>
                         </div>
                         <div className="flex items-start gap-2">
-                          <span className="text-white/80 font-semibold text-sm">ما الذي حدث:</span>
-                          <span className="text-emerald-500 font-bold">{getActionDetails(e)}</span>
+                          <span className="text-black/70 font-semibold text-sm">ما الذي حدث:</span>
+                          <span className="text-blue-600 font-bold">{getActionDetails(e)}</span>
                         </div>
                       </div>
                     </div>

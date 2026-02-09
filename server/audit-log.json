@@ -1,6 +1,841 @@
 {
   "entries": [
     {
+      "id": "1770653604888-s8n1c0",
+      "timestamp": "2026-02-09T16:13:24.888Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770652674525-4qqc2a",
+        "name": "محمد",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "volunteers:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "employees:edit",
+          "manage_donors",
+          "audit:view"
+        ],
+        "active": true,
+        "role": "موظف ",
+        "phone": "0541516078"
+      }
+    },
+    {
+      "id": "1770653588804-1e3439",
+      "timestamp": "2026-02-09T16:13:08.804Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770652674525-4qqc2a",
+        "name": "محمد",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "volunteers:view"
+        ],
+        "active": true,
+        "role": "موظف ",
+        "phone": "0541516078"
+      }
+    },
+    {
+      "id": "1770653576858-nou0zt",
+      "timestamp": "2026-02-09T16:12:56.858Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770652674525-4qqc2a",
+        "name": "محمد",
+        "permissions": [
+          "beneficiaries:view"
+        ],
+        "active": true,
+        "role": "موظف ",
+        "phone": "0541516078"
+      }
+    },
+    {
+      "id": "1770653387017-f9yzoc",
+      "timestamp": "2026-02-09T16:09:47.017Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770652674525-4qqc2a",
+        "name": "محمد",
+        "permissions": [],
+        "active": true,
+        "role": "موظف ",
+        "phone": "0541516078"
+      }
+    },
+    {
+      "id": "1770653042752-enx3zo",
+      "timestamp": "2026-02-09T16:04:02.752Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770652674525-4qqc2a",
+        "name": "محمد",
+        "permissions": [],
+        "active": true,
+        "role": "موظف ",
+        "phone": "0541516078"
+      }
+    },
+    {
+      "id": "1770652828345-l79389",
+      "timestamp": "2026-02-09T16:00:28.345Z",
+      "actor": "mhmed666q@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770652674532-hwb09h",
+      "timestamp": "2026-02-09T15:57:54.532Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "add_employee",
+      "details": {
+        "id": "1770652674525-4qqc2a",
+        "email": "mhmed666q@gmail.com",
+        "name": "محمد",
+        "role": "موظف "
+      }
+    },
+    {
+      "id": "1770652635267-25x3fv",
+      "timestamp": "2026-02-09T15:57:15.267Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1737889200000-president",
+        "name": "مالك الجمعية",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "employees:edit",
+          "manage_donors",
+          "audit:view"
+        ],
+        "active": true,
+        "role": "president",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770652629190-oh8gwa",
+      "timestamp": "2026-02-09T15:57:09.190Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "delete_employee",
+      "details": {
+        "id": "1769869465701-llvvw9"
+      }
+    },
+    {
+      "id": "1770652626569-3jy1dc",
+      "timestamp": "2026-02-09T15:57:06.569Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "delete_employee",
+      "details": {
+        "id": "1770374651845-z45069"
+      }
+    },
+    {
+      "id": "1770650355301-a0d44f",
+      "timestamp": "2026-02-09T15:19:15.301Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770632138484-nglnfg",
+      "timestamp": "2026-02-09T10:15:38.484Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770374868726-11fzov",
+      "timestamp": "2026-02-06T10:47:48.726Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770374651845-z45069",
+        "name": "لل",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "audit:view",
+          "manage_donors",
+          "employees:edit"
+        ],
+        "active": true,
+        "role": "مدير",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770374857311-dyrmu7",
+      "timestamp": "2026-02-06T10:47:37.311Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770374651845-z45069",
+        "name": "لل",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "audit:view",
+          "manage_donors",
+          "employees:edit"
+        ],
+        "active": true,
+        "role": "مدير",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770374796069-og1op4",
+      "timestamp": "2026-02-06T10:46:36.069Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770374651845-z45069",
+        "name": "لل",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "audit:view",
+          "manage_donors",
+          "employees:edit"
+        ],
+        "active": true,
+        "role": "مدير",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770374769580-f2lzaj",
+      "timestamp": "2026-02-06T10:46:09.580Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770374651845-z45069",
+        "name": "لل",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "audit:view",
+          "manage_donors",
+          "employees:edit"
+        ],
+        "active": true,
+        "role": "مدير",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770374720063-armzch",
+      "timestamp": "2026-02-06T10:45:20.063Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770374651845-z45069",
+        "name": "لل",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "audit:view",
+          "manage_donors",
+          "employees:edit"
+        ],
+        "active": true,
+        "role": "مدير",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770374713970-kaz3at",
+      "timestamp": "2026-02-06T10:45:13.970Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770374651845-z45069",
+        "name": "لل",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "audit:view",
+          "manage_donors",
+          "employees:edit"
+        ],
+        "active": true,
+        "role": "مدير",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770374697080-hkj2oi",
+      "timestamp": "2026-02-06T10:44:57.080Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1770374651845-z45069",
+        "name": "لل",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "audit:view",
+          "manage_donors",
+          "employees:edit"
+        ],
+        "active": true,
+        "role": "مدير",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770374651852-zm3gpy",
+      "timestamp": "2026-02-06T10:44:11.852Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "add_employee",
+      "details": {
+        "id": "1770374651845-z45069",
+        "email": "r2e32vo@gmail.com",
+        "name": "لل",
+        "role": "مدير"
+      }
+    },
+    {
+      "id": "1770374500856-8o1918",
+      "timestamp": "2026-02-06T10:41:40.856Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "name": "ييي",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "employees:edit",
+          "manage_donors",
+          "audit:view"
+        ],
+        "active": true,
+        "role": "يي",
+        "phone": "ييي"
+      }
+    },
+    {
+      "id": "1770374490512-huuaf2",
+      "timestamp": "2026-02-06T10:41:30.512Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1737889200000-president",
+        "name": "مالك الجمعية",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "employees:edit",
+          "manage_donors",
+          "audit:view"
+        ],
+        "active": true,
+        "role": "president",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770374280881-v621h8",
+      "timestamp": "2026-02-06T10:38:00.881Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770202556389-b51wl9",
+      "timestamp": "2026-02-04T10:55:56.389Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770201906443-4excmz",
+      "timestamp": "2026-02-04T10:45:06.443Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "name": "ييي",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "employees:edit",
+          "manage_donors",
+          "audit:view"
+        ],
+        "active": true,
+        "role": "يي",
+        "phone": "ييي"
+      }
+    },
+    {
+      "id": "1770201891109-5l6zca",
+      "timestamp": "2026-02-04T10:44:51.109Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "name": "ييي",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view"
+        ],
+        "active": true,
+        "role": "يي",
+        "phone": "ييي"
+      }
+    },
+    {
+      "id": "1770201878072-mdpcgn",
+      "timestamp": "2026-02-04T10:44:38.072Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "name": "ييي",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view"
+        ],
+        "active": true,
+        "role": "يي",
+        "phone": "ييي"
+      }
+    },
+    {
+      "id": "1770201853095-yxyyuf",
+      "timestamp": "2026-02-04T10:44:13.096Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "name": "ييي",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "analytics:view",
+          "employees:add",
+          "employees:remove",
+          "employees:edit",
+          "manage_donors",
+          "audit:view"
+        ],
+        "active": true,
+        "role": "يي",
+        "phone": "ييي"
+      }
+    },
+    {
+      "id": "1770201844173-tgbenz",
+      "timestamp": "2026-02-04T10:44:04.173Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "name": "ييي",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view"
+        ],
+        "active": true,
+        "role": "يي",
+        "phone": "ييي"
+      }
+    },
+    {
+      "id": "1770201826582-04wckn",
+      "timestamp": "2026-02-04T10:43:46.582Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "name": "ييي",
+        "permissions": [],
+        "active": true,
+        "role": "يي",
+        "phone": "ييي"
+      }
+    },
+    {
+      "id": "1770201810519-1k0cvb",
+      "timestamp": "2026-02-04T10:43:30.519Z",
+      "actor": "re32vo@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770201802951-rss62t",
+      "timestamp": "2026-02-04T10:43:22.951Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "name": "ييي",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "employees:add",
+          "analytics:view",
+          "employees:remove",
+          "employees:edit",
+          "manage_donors",
+          "audit:view"
+        ],
+        "active": true,
+        "role": "يي",
+        "phone": "ييي"
+      }
+    },
+    {
+      "id": "1770201796518-39ms8g",
+      "timestamp": "2026-02-04T10:43:16.518Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "delete_employee",
+      "details": {
+        "id": "1769419201365-snub0u"
+      }
+    },
+    {
+      "id": "1770201791345-use8sv",
+      "timestamp": "2026-02-04T10:43:11.345Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "update_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "name": "ييي",
+        "permissions": [
+          "beneficiaries:view",
+          "jobs:view",
+          "contact:view",
+          "employees:add",
+          "analytics:view",
+          "employees:remove",
+          "employees:edit",
+          "manage_donors",
+          "audit:view"
+        ],
+        "active": true,
+        "role": "يي",
+        "phone": "ييي"
+      }
+    },
+    {
+      "id": "1770201569604-qo7ibz",
+      "timestamp": "2026-02-04T10:39:29.604Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770201055303-m6y2ny",
+      "timestamp": "2026-02-04T10:30:55.303Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "7m41rh3reo9pq5lltoab4l"
+      }
+    },
+    {
+      "id": "1770201034795-lbrnrp",
+      "timestamp": "2026-02-04T10:30:34.795Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770200872690-o28wfg",
+      "timestamp": "2026-02-04T10:27:52.690Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "j1xyo02gfr4wginx6cine"
+      }
+    },
+    {
+      "id": "1770200848211-02dx1b",
+      "timestamp": "2026-02-04T10:27:28.211Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770200615763-kxmxgw",
+      "timestamp": "2026-02-04T10:23:35.763Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "tqzmscea2oh28kolnrkc19"
+      }
+    },
+    {
+      "id": "1770200603303-rbkjeh",
+      "timestamp": "2026-02-04T10:23:23.303Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770200578188-tyxsb6",
+      "timestamp": "2026-02-04T10:22:58.188Z",
+      "actor": "mhmed666q@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "eeaip99bq1vaaz271bns4s"
+      }
+    },
+    {
+      "id": "1770200562826-ivvztt",
+      "timestamp": "2026-02-04T10:22:42.826Z",
+      "actor": "mhmed666q@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770199761194-ni8nyr",
+      "timestamp": "2026-02-04T10:09:21.194Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "q85l0g4jfrwoc0c00arse"
+      }
+    },
+    {
+      "id": "1770199731484-341ps2",
+      "timestamp": "2026-02-04T10:08:51.484Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770194344844-b9paht",
+      "timestamp": "2026-02-04T08:39:04.844Z",
+      "actor": "re32vo@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "m8fsy9zfhvlhdbt5e7sw"
+      }
+    },
+    {
+      "id": "1770194331087-rtyl5f",
+      "timestamp": "2026-02-04T08:38:51.087Z",
+      "actor": "re32vo@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1769869465705-yjskdp",
+      "timestamp": "2026-01-31T14:24:25.705Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "add_employee",
+      "details": {
+        "id": "1769869465701-llvvw9",
+        "email": "re32vo@gmail.com",
+        "name": "ييي",
+        "role": "يي"
+      }
+    },
+    {
+      "id": "1769864185108-qkfb2n",
+      "timestamp": "2026-01-31T12:56:25.108Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "cd2gus7k9wcudq8ax7uzq8"
+      }
+    },
+    {
+      "id": "1769864173043-cau02g",
+      "timestamp": "2026-01-31T12:56:13.043Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1769861690519-entncw",
+      "timestamp": "2026-01-31T12:14:50.519Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "24ni0mqzh0lh27wr0obiwl"
+      }
+    },
+    {
+      "id": "1769861678842-u10q8a",
+      "timestamp": "2026-01-31T12:14:38.842Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1769861240747-zu3z4r",
+      "timestamp": "2026-01-31T12:07:20.747Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "h989jkyvadw6wpqxfuzl"
+      }
+    },
+    {
+      "id": "1769861221599-ku2s11",
+      "timestamp": "2026-01-31T12:07:01.599Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1769859385035-pknge5",
+      "timestamp": "2026-01-31T11:36:25.035Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "72mh9feci3es1pe63lctnc"
+      }
+    },
+    {
+      "id": "1769859367511-ou4v02",
+      "timestamp": "2026-01-31T11:36:07.511Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1769859086657-g7hxgq",
+      "timestamp": "2026-01-31T11:31:26.657Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "7rwgn1g53vwz8mj44sdqsc"
+      }
+    },
+    {
+      "id": "1769859056811-euhak3",
+      "timestamp": "2026-01-31T11:30:56.811Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1769858819709-xh4pqy",
+      "timestamp": "2026-01-31T11:26:59.709Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1769858639735-l041n7",
+      "timestamp": "2026-01-31T11:23:59.735Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
       "id": "1769833142622-y4bpch",
       "timestamp": "2026-01-31T04:19:02.622Z",
       "actor": "bedaihsa@gmail.com",

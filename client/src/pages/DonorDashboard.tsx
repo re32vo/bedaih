@@ -330,7 +330,7 @@ export default function DonorDashboard() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-emerald-900/30 to-emerald-800/30 rounded-lg p-4 backdrop-blur border border-emerald-700/50"
+              className="bg-white rounded-lg p-4 border border-slate-200"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -346,7 +346,7 @@ export default function DonorDashboard() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-blue-900/30 to-blue-800/30 rounded-lg p-4 backdrop-blur border border-blue-700/50"
+              className="bg-white rounded-lg p-4 border border-slate-200"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -362,7 +362,7 @@ export default function DonorDashboard() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-gradient-to-br from-rose-900/30 to-rose-800/30 rounded-lg p-4 backdrop-blur border border-rose-700/50"
+              className="bg-white rounded-lg p-4 border border-slate-200"
             >
               <div className="flex items-center justify-between">
                 <div>

@@ -50,7 +50,7 @@ export function addEmployee(payload: Omit<Employee, "id">): Employee {
   const newEmployee: Employee = {
     ...payload,
     role: payload.role || "",
-    permissions: payload.permissions || ["beneficiaries:view", "jobs:view", "contact:view"],
+    permissions: payload.permissions || ["beneficiaries:view", "jobs:view", "contact:view", "volunteers:view"],
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
   };
 
@@ -104,6 +104,7 @@ export function ensurePresident() {
       "beneficiaries:view",
       "jobs:view",
       "contact:view",
+      "volunteers:view",
       "analytics:view",
       "employees:add",
       "employees:remove",

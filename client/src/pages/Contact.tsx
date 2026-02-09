@@ -17,6 +17,7 @@ export default function Contact() {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       message: "",
     },
   });
@@ -134,6 +135,21 @@ export default function Contact() {
                           <FormLabel className="text-black">البريد الإلكتروني</FormLabel>
                           <FormControl>
                             <Input type="email" placeholder="example@mail.com" className="h-12 bg-white border-gray-300 text-black" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="md:max-w-md md:mx-auto">
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-black">رقم الهاتف</FormLabel>
+                          <FormControl>
+                            <Input type="tel" placeholder="05xxxxxxxx" className="h-12 bg-white border-gray-300 text-black" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>

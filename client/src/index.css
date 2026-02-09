@@ -7,15 +7,15 @@
 
 /* متغيرات الألوان للوضع الفاتح */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
+  --background: 0 0% 100%; /* أبيض */
+  --foreground: 0 0% 0%;   /* أسود */
   --border: 220 13% 91%;
   --input: 220 13% 91%;
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
+  --card-foreground: 0 0% 0%;
   --card-border: 220 13% 91%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
+  --popover-foreground: 0 0% 0%;
   --popover-border: 220 13% 91%;
   --primary: 174 62% 47%;
   --primary-foreground: 0 0% 100%;
@@ -68,34 +68,21 @@ html {
   font-family: 'Tajawal', 'Cairo', Arial, sans-serif;
   direction: rtl;
   font-size: 16px;
+  background: #0f172a !important;
+  min-height: 100%;
+}
 
 body {
-  background: #111 !important;
-  color: #fff !important;
+  background: #0f172a !important;
+  color: #111 !important;
   font-family: 'Tajawal', 'Cairo', Arial, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  margin-bottom: 1rem;
-  line-height: 1.8;
-  color: #232323;
-  font-family: 'Tajawal', Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-  line-height: 1.8;
-  color: #fff;
-  font-family: 'Tajawal', Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 h3 {
@@ -115,17 +102,10 @@ h4, h5, h6 {
 }
 
 /* Paragraph Spacing */
+p {
   margin-bottom: 1rem;
   line-height: 1.8;
-  color: #000;
-  font-family: 'Tajawal', Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
-
 
 
 /* Custom Components */
