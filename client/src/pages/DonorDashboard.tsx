@@ -282,7 +282,7 @@ export default function DonorDashboard() {
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600">جاري تحميل البيانات...</p>
+          <p className="text-slate-700">جاري تحميل البيانات...</p>
         </div>
       </div>
     );
@@ -291,7 +291,7 @@ export default function DonorDashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-slate-900 to-slate-800 text-white shadow-lg">
+      <div className="bg-gradient-to-r from-white to-emerald-50 shadow-lg border-b border-slate-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-4">
@@ -301,14 +301,14 @@ export default function DonorDashboard() {
                 className="w-24 h-24 object-contain"
               />
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold">لوحة المتبرعين</h1>
-                <p className="text-white/80 text-sm">مرحباً بك {profileData.name}</p>
+                <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">لوحة المتبرعين</h1>
+                <p className="text-slate-600 text-sm">مرحباً بك {profileData.name}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <Button
                 onClick={handleBrowseSite}
-                className="bg-white/20 hover:bg-white/30 text-white border border-white/30"
+                className="bg-emerald-500 hover:bg-emerald-600 text-white"
               >
                 <Home className="w-4 h-4 ml-2" />
                 تصفح الموقع
@@ -316,7 +316,7 @@ export default function DonorDashboard() {
               <Button
                 onClick={handleLogout}
                 variant="outline"
-                className="bg-white hover:bg-white/90 text-red-500 border-2 border-white"
+                className="bg-white hover:bg-red-50 text-red-500 border-2 border-red-500"
               >
                 <LogOut className="w-4 h-4 ml-2" />
                 تسجيل الخروج
@@ -334,9 +334,9 @@ export default function DonorDashboard() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-emerald-400/90 text-sm">إجمالي التبرعات</p>
-                  <p className="text-3xl font-bold mt-1 text-emerald-100">{stats.totalDonations.toLocaleString()}</p>
-                  <p className="text-emerald-400/70 text-xs mt-1">ريال سعودي</p>
+                  <p className="text-emerald-600 text-sm font-medium">إجمالي التبرعات</p>
+                  <p className="text-3xl font-bold mt-1 text-emerald-700">{stats.totalDonations.toLocaleString()}</p>
+                  <p className="text-emerald-600 text-xs mt-1">ريال سعودي</p>
                 </div>
                 <Gift className="w-10 h-10 text-emerald-500" />
               </div>
@@ -350,9 +350,9 @@ export default function DonorDashboard() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-blue-400/90 text-sm">عدد التبرعات</p>
-                  <p className="text-3xl font-bold mt-1 text-blue-100">{stats.donationCount}</p>
-                  <p className="text-blue-400/70 text-xs mt-1">تبرعات</p>
+                  <p className="text-blue-600 text-sm font-medium">عدد التبرعات</p>
+                  <p className="text-3xl font-bold mt-1 text-blue-700">{stats.donationCount}</p>
+                  <p className="text-blue-600 text-xs mt-1">تبرعات</p>
                 </div>
                 <TrendingUp className="w-10 h-10 text-blue-500" />
               </div>
@@ -366,9 +366,9 @@ export default function DonorDashboard() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-rose-400/90 text-sm">متوسط التبرع</p>
-                  <p className="text-3xl font-bold mt-1 text-rose-100">{stats.avgDonation}</p>
-                  <p className="text-rose-400/70 text-xs mt-1">ريال سعودي</p>
+                  <p className="text-rose-600 text-sm font-medium">متوسط التبرع</p>
+                  <p className="text-3xl font-bold mt-1 text-rose-700">{stats.avgDonation}</p>
+                  <p className="text-rose-600 text-xs mt-1">ريال سعودي</p>
                 </div>
                 <Heart className="w-10 h-10 text-rose-500 fill-current" />
               </div>
@@ -387,7 +387,7 @@ export default function DonorDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white rounded-2xl shadow-lg p-6 sm:p-8"
+              className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-slate-200"
             >
               <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                 <Gift className="w-6 h-6 text-emerald-500" />
@@ -402,18 +402,18 @@ export default function DonorDashboard() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.5 + index * 0.1 }}
-                      className="border border-slate-200 rounded-xl p-4 hover:shadow-md transition-shadow"
+                      className="border border-slate-200 rounded-xl p-4 hover:shadow-md transition-shadow bg-slate-50"
                     >
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
+                          <div className="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center">
                             <svg viewBox="0 0 100 100" className="w-6 h-6">
                               <path d="M50 30 L50 70 M30 50 L70 50" stroke="#10b981" strokeWidth="10" strokeLinecap="round"/>
                               <circle cx="50" cy="50" r="35" fill="none" stroke="#10b981" strokeWidth="6"/>
                             </svg>
                           </div>
                           <div>
-                            <p className="font-bold text-slate-900">{donation.amount} ريال</p>
+                            <p className="font-bold text-emerald-700">{donation.amount} ريال</p>
                             <p className="text-sm text-slate-600">{donation.method}</p>
                           </div>
                         </div>
@@ -422,14 +422,14 @@ export default function DonorDashboard() {
                         </div>
                       </div>
 
-                      <div className="bg-slate-50 rounded-lg p-3 flex items-center justify-between">
+                      <div className="bg-slate-100 rounded-lg p-3 flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-mono text-slate-900">{donation.code}</span>
-                          <span className="text-xs text-slate-500">كود التبرع</span>
+                          <span className="text-sm font-mono text-slate-800">{donation.code}</span>
+                          <span className="text-xs text-slate-600">كود التبرع</span>
                         </div>
                         <button
                           onClick={() => copyToClipboard(donation.code)}
-                          className="p-2 hover:bg-white rounded transition-colors"
+                          className="p-2 hover:bg-slate-200 rounded transition-colors"
                         >
                           {copiedCode === donation.code ? (
                             <Check className="w-4 h-4 text-green-600" />
@@ -442,7 +442,7 @@ export default function DonorDashboard() {
                   ))
                 ) : (
                   <div className="text-center py-8">
-                    <Heart className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+                    <Heart className="w-12 h-12 text-slate-400 mx-auto mb-3" />
                     <p className="text-slate-600">لا توجد تبرعات حتى الآن</p>
                   </div>
                 )}
@@ -457,7 +457,7 @@ export default function DonorDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white rounded-2xl shadow-lg p-6"
+              className="bg-white rounded-2xl shadow-lg p-6 border border-slate-200"
             >
               <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <User className="w-5 h-5 text-emerald-500" />
@@ -472,7 +472,7 @@ export default function DonorDashboard() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-600 mb-1">البريد الإلكتروني</p>
-                    <p className="font-semibold text-slate-900 text-sm">{profileData.email}</p>
+                    <p className="font-semibold text-slate-700 text-sm">{profileData.email}</p>
                   </div>
                   <div>
                     <p className="text-xs text-slate-600 mb-1">رقم الهاتف</p>
@@ -491,33 +491,33 @@ export default function DonorDashboard() {
                   {!verificationMode ? (
                     <>
                       <div>
-                        <label className="text-xs text-slate-600 mb-1 block">الاسم الكامل</label>
+                        <label className="text-xs text-slate-700 mb-1 block">الاسم الكامل</label>
                         <input
                           type="text"
                           value={profileData.name}
                           onChange={(e) => setProfileData(prev => ({ ...prev, name: e.target.value }))}
                           placeholder="أدخل اسمك الكامل"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-right"
+                          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-right bg-white text-slate-900"
                         />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-600 mb-1 block">البريد الإلكتروني</label>
+                        <label className="text-xs text-slate-700 mb-1 block">البريد الإلكتروني</label>
                         <input
                           type="email"
                           value={profileData.email}
                           onChange={(e) => setProfileData(prev => ({ ...prev, email: e.target.value }))}
                           placeholder="أدخل بريدك الإلكتروني"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-right"
+                          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-right bg-white text-slate-900"
                         />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-600 mb-1 block">رقم الهاتف</label>
+                        <label className="text-xs text-slate-700 mb-1 block">رقم الهاتف</label>
                         <input
                           type="tel"
                           value={profileData.phone}
                           onChange={(e) => setProfileData(prev => ({ ...prev, phone: e.target.value }))}
                           placeholder="أدخل رقم هاتفك"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-right"
+                          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-right bg-white text-slate-900"
                           dir="ltr"
                         />
                       </div>
@@ -539,18 +539,18 @@ export default function DonorDashboard() {
                     </>
                   ) : (
                     <>
-                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
-                        <p className="text-sm text-blue-900">🔐 تحقق من البريد الجديد</p>
-                        <p className="text-xs text-blue-700 mt-1">تم إرسال رمز تحقق إلى <strong>{profileData.email}</strong></p>
+                      <div className="bg-blue-50 border border-blue-300 rounded-lg p-3 mb-3">
+                        <p className="text-sm text-blue-700">🔐 تحقق من البريد الجديد</p>
+                        <p className="text-xs text-blue-600 mt-1">تم إرسال رمز تحقق إلى <strong>{profileData.email}</strong></p>
                       </div>
                       <div>
-                        <label className="text-xs text-slate-600 mb-1 block">رمز التحقق</label>
+                        <label className="text-xs text-slate-700 mb-1 block">رمز التحقق</label>
                         <input
                           type="text"
                           value={verificationCode}
                           onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
                           placeholder="أدخل الرمز 6 أرقام"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-center text-2xl tracking-widest"
+                          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-center text-2xl tracking-widest bg-white text-slate-900"
                           maxLength="6"
                         />
                       </div>

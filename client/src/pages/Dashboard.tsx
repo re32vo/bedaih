@@ -302,7 +302,7 @@ export default function Dashboard() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-500/10 via-blue-500/5 to-purple-500/10">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-emerald-500 border-t-blue-500 rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-white font-semibold">جاري التحميل...</p>
+          <p className="text-black font-semibold">جاري التحميل...</p>
         </div>
       </div>
     );
@@ -316,13 +316,13 @@ export default function Dashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-md w-full"
         >
-          <div className="bg-slate-950 rounded-2xl shadow-2xl border border-slate-700 p-8">
+          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-8">
             <AlertCircle className="w-12 h-12 mx-auto text-amber-400 mb-4" />
-            <h2 className="text-2xl font-bold font-heading text-white mb-2">صلاحية غير صحيحة</h2>
-            <p className="text-white/80 mb-6">
+            <h2 className="text-2xl font-bold font-heading text-black mb-2">صلاحية غير صحيحة</h2>
+            <p className="text-black/80 mb-6">
               لم يتم التحقق من الدخول
             </p>
-            <p className="text-white/80 mb-6">
+            <p className="text-black/80 mb-6">
               يرجى إعادة تسجيل الدخول
             </p>
             <a href="/login" className="block">
@@ -566,7 +566,7 @@ export default function Dashboard() {
           <div>
             <Card>
               <CardHeader>
-                <CardTitle className="text-white">الإجراءات السريعة</CardTitle>
+                <CardTitle className="text-black">الإجراءات السريعة</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {hasPermission('beneficiaries:view') && (
@@ -639,42 +639,42 @@ export default function Dashboard() {
             </Card>
 
             {/* Session Info */}
-            <Card className="mt-6 bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700 text-white">
+            <Card className="mt-6 bg-white border-slate-200 text-black">
               <CardHeader>
-                <CardTitle className="text-sm text-white">معلومات الجلسة</CardTitle>
+                <CardTitle className="text-sm text-black">معلومات الجلسة</CardTitle>
               </CardHeader>
-              <CardContent className="text-xs space-y-2 text-white">
+              <CardContent className="text-xs space-y-2 text-black">
                 <p className="flex items-center gap-2">
                   <CheckCircle className="w-3 h-3 text-green-400" />
                   الجلسة نشطة وآمنة
                 </p>
                 <p className="flex items-center gap-2">
-                  <Calendar className="w-3 h-3 text-white" />
+                  <Calendar className="w-3 h-3 text-black" />
                   {new Date().toLocaleDateString('ar-SA')}
                 </p>
-                <p className="text-[10px] text-white">
+                <p className="text-[10px] text-black">
                   آخر تحديث: {new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}
                 </p>
               </CardContent>
             </Card>
 
             {/* Quick Stats */}
-            <Card className="mt-6 bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700">
+            <Card className="mt-6 bg-white border-slate-200">
               <CardHeader>
-                <CardTitle className="text-sm text-white">إحصائيات سريعة</CardTitle>
+                <CardTitle className="text-sm text-black">إحصائيات سريعة</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex justify-between items-center text-xs text-white">
+                <div className="flex justify-between items-center text-xs text-black">
                   <span>معدل الاستجابة</span>
-                  <Badge variant="outline" className="bg-green-500/30 text-green-200 border-green-500/50 font-semibold">98%</Badge>
+                  <Badge variant="outline" className="bg-green-500/30 text-green-900 border-green-500/50 font-semibold">98%</Badge>
                 </div>
-                <div className="flex justify-between items-center text-xs text-white">
+                <div className="flex justify-between items-center text-xs text-black">
                   <span>الطلبات الجديدة اليوم</span>
-                  <Badge variant="outline" className="bg-blue-500/30 text-blue-200 border-blue-500/50 font-semibold">{Math.floor(stats.total * 0.05)}</Badge>
+                  <Badge variant="outline" className="bg-blue-500/30 text-blue-900 border-blue-300 font-semibold">{Math.floor(stats.total * 0.05)}</Badge>
                 </div>
-                <div className="flex justify-between items-center text-xs text-white">
+                <div className="flex justify-between items-center text-xs text-black">
                   <span>متوسط وقت المعالجة</span>
-                  <Badge variant="outline" className="bg-amber-500/30 text-amber-200 border-amber-500/50 font-semibold">2.5 ساعة</Badge>
+                  <Badge variant="outline" className="bg-amber-500/30 text-amber-900 border-amber-300 font-semibold">2.5 ساعة</Badge>
                 </div>
               </CardContent>
             </Card>

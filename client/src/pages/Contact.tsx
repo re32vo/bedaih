@@ -66,7 +66,7 @@ export default function Contact() {
                   </div>
                   <div className="text-sm sm:text-base">
                     <h4 className="font-bold text-black">الموقع</h4>
-                    <p className="text-black text-xs sm:text-sm">المملكة العربية السعودية، الرياض<br/>حي النخيل، طريق الملك فهد</p>
+                    <p className="text-black text-xs sm:text-sm">المملكة العربية السعودية، جدة</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 sm:gap-4">
@@ -75,8 +75,7 @@ export default function Contact() {
                   </div>
                   <div className="text-sm sm:text-base">
                     <h4 className="font-bold text-black">الهاتف</h4>
-                    <p className="text-black text-xs sm:text-sm" dir="ltr">+966-555-0000</p>
-                    <p className="text-black text-xs sm:text-sm" dir="ltr">+966-11-444-4444</p>
+                    <p className="text-black text-xs sm:text-sm" dir="ltr">0595955800</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 sm:gap-4">
@@ -85,7 +84,7 @@ export default function Contact() {
                   </div>
                   <div className="text-sm sm:text-base">
                     <h4 className="font-bold text-black">البريد الإلكتروني</h4>
-                    <p className="text-black text-xs sm:text-sm">info@bedaya-charity.org</p>
+                    <p className="text-black text-xs sm:text-sm">albaladone@hotmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 sm:gap-4">

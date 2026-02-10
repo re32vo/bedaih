@@ -1,6 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { Heart, Smartphone, Landmark, CreditCard, Copy, Check, Zap, Users, Target, Award, UserPlus, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 
@@ -45,6 +55,7 @@ export default function Donate() {
   const [, setLocation] = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [donorEmail, setDonorEmail] = useState('');
+  const [showLoginDialog, setShowLoginDialog] = useState(false);
   const paymentDetailsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -90,6 +101,17 @@ export default function Donate() {
   const handleCompletePayment = async () => {
     if (!selectedMethod) return;
 
+    // إذا لم يكن مسجل دخول، اعرض الـ dialog
+    if (!isLoggedIn) {
+      setShowLoginDialog(true);
+      return;
+    }
+
+    // إذا كان مسجل دخول، أكمل التبرع مباشرة
+    await processDonation();
+  };
+
+  const processDonation = async () => {
     const method = donationMethods.find(m => m.id === selectedMethod);
     const donationCode = Math.random().toString(36).substring(2, 10).toUpperCase();
 
@@ -417,6 +439,59 @@ export default function Donate() {
           </div>
         </div>
       </section>
+
+      {/* Login Dialog */}
+      <AlertDialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+        <AlertDialogContent className="max-w-md text-right" dir="rtl">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+              <Heart className="w-6 h-6 text-emerald-500" />
+              شكراً لتبرعك!
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-slate-700 text-base space-y-4 pt-4">
+              <p className="font-semibold">سجل دخول للحصول على:</p>
+              <ul className="space-y-2 mr-4">
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <span>إيصال التبرع عبر البريد الإلكتروني</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <span>حفظ سجل تبرعاتك في لوحة المتبرعين</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <span>متابعة تبرعاتك في أي وقت</span>
+                </li>
+              </ul>
+              <p className="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                أو يمكنك المتابعة بدون تسجيل دخول
+              </p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="gap-2 sm:gap-2">
+            <AlertDialogCancel 
+              onClick={() => {
+                setShowLoginDialog(false);
+                processDonation();
+              }}
+              className="bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
+              تبرع بدون تسجيل
+            </AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={() => {
+                setShowLoginDialog(false);
+                setLocation('/donor-login');
+              }}
+              className="bg-emerald-500 hover:bg-emerald-600 text-white"
+            >
+              <LogIn className="w-4 h-4 ml-2" />
+              تسجيل الدخول
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

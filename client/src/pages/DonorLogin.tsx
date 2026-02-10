@@ -53,14 +53,25 @@ export default function DonorLogin() {
         }),
       });
 
+      // Check content type before parsing
+      const contentType = res.headers.get("content-type");
+      let data;
+      
+      if (contentType && contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        // If not JSON, get text and throw error
+        const text = await res.text();
+        console.error("Non-JSON response:", text);
+        throw new Error("حدث خطأ في الخادم. الرجاء المحاولة مرة أخرى.");
+      }
+
       if (!res.ok) {
-        const err = await res.json();
-        
         // If account doesn't exist in login mode, suggest registration
-        if (err.shouldRegister) {
+        if (data.shouldRegister) {
           toast({
             title: "الحساب غير موجود",
-            description: err.message,
+            description: data.message,
             variant: "destructive",
           });
           setIsLogin(false); // Switch to registration mode
@@ -68,20 +79,19 @@ export default function DonorLogin() {
         }
         
         // If account exists in registration mode, suggest login
-        if (err.shouldLogin) {
+        if (data.shouldLogin) {
           toast({
             title: "الحساب موجود مسبقاً",
-            description: err.message,
+            description: data.message,
             variant: "destructive",
           });
           setIsLogin(true); // Switch to login mode
           return;
         }
         
-        throw new Error(err.message || "فشل إرسال الكود");
+        throw new Error(data.message || "فشل إرسال الكود");
       }
 
-      const data = await res.json();
       setStage('verify');
       
       toast({
@@ -123,12 +133,22 @@ export default function DonorLogin() {
         }),
       });
 
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || "كود التحقق غير صحيح");
+      // Check content type before parsing
+      const contentType = res.headers.get("content-type");
+      let data;
+      
+      if (contentType && contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        // If not JSON, get text and throw error
+        const text = await res.text();
+        console.error("Non-JSON response:", text);
+        throw new Error("حدث خطأ في الخادم. الرجاء المحاولة مرة أخرى.");
       }
 
-      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "كود التحقق غير صحيح");
+      }
       
       toast({
         title: "✅ نجح التحقق",

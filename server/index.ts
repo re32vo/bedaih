@@ -54,6 +54,11 @@ const apiLimiter = rateLimit({
   message: "Too many requests from this IP, please try again later.",
   standardHeaders: true,
   legacyHeaders: false,
+  handler: (req, res) => {
+    res.status(429).json({
+      message: "طلبات كثيرة جداً من هذا العنوان، الرجاء المحاولة لاحقاً."
+    });
+  }
 });
 
 const formLimiter = rateLimit({
@@ -61,6 +66,11 @@ const formLimiter = rateLimit({
   max: 5, // limit each IP to 5 form submissions per hour
   message: "Too many form submissions, please try again later.",
   skipSuccessfulRequests: false,
+  handler: (req, res) => {
+    res.status(429).json({
+      message: "طلبات كثيرة جداً، الرجاء المحاولة بعد ساعة."
+    });
+  }
 });
 
 app.use("/api/", apiLimiter);

@@ -57,7 +57,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <nav className="hidden md:flex items-center gap-2">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
-                <span className={`px-3 py-2 rounded-lg text-sm font-medium cursor-pointer ${location === link.href ? "font-semibold bg-slate-100 dark:bg-white/12 text-slate-900 dark:text-white" : "text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10"}`}>
+                <span className={`px-3 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all ${location === link.href ? "font-semibold bg-emerald-500 text-white dark:bg-emerald-600" : "text-slate-700 dark:text-white hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-white/10 dark:hover:text-white"}`}>
                   {link.label}
                 </span>
               </Link>
@@ -100,7 +100,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link key={link.href} href={link.href}>
-                  <span className={`block px-3 py-2 rounded-lg text-base font-medium ${location === link.href ? "font-semibold bg-slate-100 dark:bg-white/12 text-slate-900 dark:text-white" : "text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10"}`}>
+                  <span className={`block px-3 py-2 rounded-lg text-base font-medium transition-all ${location === link.href ? "font-semibold bg-emerald-500 text-white dark:bg-emerald-600" : "text-slate-700 dark:text-white hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-white/10 dark:hover:text-white"}`}>
                     {link.label}
                   </span>
                 </Link>

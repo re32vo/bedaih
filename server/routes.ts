@@ -256,59 +256,6 @@ export async function registerRoutes(
     }
   });
 
-  // Volunteers Form
-  app.post(api.volunteers.create.path, async (req, res) => {
-    try {
-      const input = api.volunteers.create.input.parse(req.body);
-      const volunteer = await createVolunteer({
-        name: input.name,
-        email: input.email,
-        phone: input.phone,
-        experience: input.experience,
-        opportunityTitle: input.opportunityTitle,
-      });
-      
-      // Log audit entry
-      logAuditEntry({
-        actor: `متطوع: ${input.email}`,
-        action: "create_volunteer",
-        details: {
-          name: input.name,
-          email: input.email,
-          phone: input.phone,
-          opportunityTitle: input.opportunityTitle,
-        }
-      });
-      
-      // Send confirmation email
-      await sendEmail(
-        input.email,
-        "تأكيد استقبال طلب التطوع",
-        `
-        <!DOCTYPE html>
-        <html dir="rtl" lang="ar">
-        <body style="font-family: Arial, sans-serif; direction: rtl;">
-          <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2 style="color: #10b981;">شكراً ${input.name}!</h2>
-            <p>تم استقبال طلب تطوعك بنجاح. سنتواصل معك قريباً.</p>
-          </div>
-        </body>
-        </html>
-        `
-      );
-      
-      res.status(201).json(volunteer);
-    } catch (err) {
-      if (err instanceof z.ZodError) {
-        return res.status(400).json({
-          message: err.errors[0].message,
-          field: err.errors[0].path.join('.'),
-        });
-      }
-      throw err;
-    }
-  });
-
   // Employees: list
   app.get("/api/employees", async (_req, res) => {
     try {
@@ -1111,14 +1058,16 @@ export async function registerRoutes(
         </html>
       `;
 
-      const emailSent = await sendEmail(
-        normalizedEmail,
-        `🔐 كود التحقق - ${isLogin ? 'تسجيل الدخول' : 'إنشاء حساب'}`,
-        emailHtml
-      );
-
-      if (!emailSent) {
-        return res.status(500).json({ message: "فشل إرسال البريد الإلكتروني. تحقق من بيانات البريد الإلكتروني." });
+      // Send email (in dev mode it will be saved to outbox instead of sending)
+      try {
+        await sendEmail(
+          normalizedEmail,
+          `🔐 كود التحقق - ${isLogin ? 'تسجيل الدخول' : 'إنشاء حساب'}`,
+          emailHtml
+        );
+      } catch (emailError) {
+        logger.error("Failed to send OTP email", emailError);
+        // Continue anyway - don't fail the request due to email issues
       }
 
       logAuditEntry({
@@ -1132,10 +1081,11 @@ export async function registerRoutes(
         expiresIn: `${isLogin ? '5' : '10'} دقائق`
       };
 
-      // For local testing or explicit request, include the OTP code in the response
-      const revealRequested = Boolean(req.body?.revealCode) || process.env.INTERNAL_OTP_DISPLAY === "true";
-      if (revealRequested) {
+      // For local testing or development, include the OTP code in the response
+      const isDev = process.env.NODE_ENV !== "production";
+      if (isDev) {
         responsePayload.code = otp;
+        responsePayload.devNote = "في وضع التطوير - الكود معروض هنا مباشرة";
       }
 
       res.json(responsePayload);
@@ -1329,7 +1279,16 @@ export async function registerRoutes(
           await sendDonationReceipt(donorEmail, donorName, Number(amount), method, code);
         } catch (emailErr) {
           logger.error("Failed to send donation receipt", emailErr);
-          // Don't fail the donation if email fails
+          // Log but don't fail the donation
+          logAuditEntry({
+            actor: `متبرع: ${donorEmail}`,
+            action: "تجاهل خطأ إرسال إيصال التبرع",
+            details: {
+              amount,
+              method,
+              error: emailErr instanceof Error ? emailErr.message : String(emailErr)
+            }
+          });
         }
       }
 

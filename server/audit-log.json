@@ -1,6 +1,332 @@
 {
   "entries": [
     {
+      "id": "1770749114338-xpdlva",
+      "timestamp": "2026-02-10T18:45:14.338Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "otp_verified",
+      "details": {
+        "token": "yrnx5qdxpo64a3wgho866"
+      }
+    },
+    {
+      "id": "1770749089501-bfcg4n",
+      "timestamp": "2026-02-10T18:44:49.501Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "send_otp",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770747526618-7z0gdk",
+      "timestamp": "2026-02-10T18:18:46.618Z",
+      "actor": "متبرع: re32vo@gmail.com",
+      "action": "تسجيل دخول متبرع",
+      "details": {
+        "email": "re32vo@gmail.com",
+        "name": "محمد نشوان",
+        "phone": "0533170903",
+        "type": "donor_login"
+      }
+    },
+    {
+      "id": "1770747514121-u58b5a",
+      "timestamp": "2026-02-10T18:18:34.121Z",
+      "actor": "متبرع: re32vo@gmail.com",
+      "action": "طلب كود تسجيل دخول",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770747499031-58exox",
+      "timestamp": "2026-02-10T18:18:19.031Z",
+      "actor": "موظف: مالك الجمعية (bedaihsa@gmail.com)",
+      "action": "تحديث بيانات متبرع",
+      "details": {
+        "donorEmail": "irjt12@gmail.com",
+        "newEmail": "re32vo@gmail.com",
+        "updatedFields": {
+          "name": "محمد نشوان",
+          "phone": "0533170903",
+          "newEmail": "re32vo@gmail.com"
+        },
+        "type": "admin_donor_update"
+      }
+    },
+    {
+      "id": "1770747431731-so8wz7",
+      "timestamp": "2026-02-10T18:17:11.731Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770747402556-wt441q",
+      "timestamp": "2026-02-10T18:16:42.556Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "تبرع جديد",
+      "details": {
+        "email": "irjt12@gmail.com",
+        "amount": 500,
+        "method": "Apple Pay",
+        "code": "KJGK3I1U",
+        "type": "donor_donation"
+      }
+    },
+    {
+      "id": "1770747391814-gh1g04",
+      "timestamp": "2026-02-10T18:16:31.814Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "تسجيل دخول متبرع",
+      "details": {
+        "email": "irjt12@gmail.com",
+        "name": "محمد نشوان",
+        "phone": "0541517078",
+        "type": "donor_login"
+      }
+    },
+    {
+      "id": "1770747378033-u1ph2u",
+      "timestamp": "2026-02-10T18:16:18.033Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "طلب كود تسجيل دخول",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770747331271-bq5kyq",
+      "timestamp": "2026-02-10T18:15:31.271Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "تبرع جديد",
+      "details": {
+        "email": "irjt12@gmail.com",
+        "amount": 20,
+        "method": "بطاقة الائتمان",
+        "code": "860374P6",
+        "type": "donor_donation"
+      }
+    },
+    {
+      "id": "1770747318675-ngh1wo",
+      "timestamp": "2026-02-10T18:15:18.675Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "تسجيل دخول متبرع",
+      "details": {
+        "email": "irjt12@gmail.com",
+        "name": "محمد نشوان",
+        "phone": "0541517078",
+        "type": "donor_login"
+      }
+    },
+    {
+      "id": "1770747308914-1q0c5o",
+      "timestamp": "2026-02-10T18:15:08.914Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "طلب كود تسجيل دخول",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770746634483-d1vw50",
+      "timestamp": "2026-02-10T18:03:54.483Z",
+      "actor": "متبرع: guest@donation.local",
+      "action": "تبرع جديد",
+      "details": {
+        "email": "guest@donation.local",
+        "amount": 10,
+        "method": "التحويل البنكي",
+        "code": "JYUZ3WPH",
+        "type": "donor_donation"
+      }
+    },
+    {
+      "id": "1770746190022-razd73",
+      "timestamp": "2026-02-10T17:56:30.022Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "تسجيل دخول متبرع",
+      "details": {
+        "email": "irjt12@gmail.com",
+        "name": "محمد نشوان",
+        "phone": "0541517078",
+        "type": "donor_login"
+      }
+    },
+    {
+      "id": "1770746176785-pkyubz",
+      "timestamp": "2026-02-10T17:56:16.785Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "طلب كود تسجيل دخول",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770745536317-dla6du",
+      "timestamp": "2026-02-10T17:45:36.317Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "تسجيل دخول متبرع",
+      "details": {
+        "email": "irjt12@gmail.com",
+        "name": "محمد نشوان",
+        "phone": "0541517078",
+        "type": "donor_login"
+      }
+    },
+    {
+      "id": "1770745523927-8zkyr9",
+      "timestamp": "2026-02-10T17:45:23.927Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "طلب كود تسجيل دخول",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770745499895-7tzz22",
+      "timestamp": "2026-02-10T17:44:59.896Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "تسجيل دخول متبرع",
+      "details": {
+        "email": "irjt12@gmail.com",
+        "name": "محمد نشوان",
+        "phone": "0533170903",
+        "type": "donor_login"
+      }
+    },
+    {
+      "id": "1770745480053-iva8ya",
+      "timestamp": "2026-02-10T17:44:40.053Z",
+      "actor": "متبرع: irjt12@gmail.com",
+      "action": "طلب كود تسجيل دخول",
+      "details": {
+        "expiresIn": "5 دقائق"
+      }
+    },
+    {
+      "id": "1770745456196-f5ytgm",
+      "timestamp": "2026-02-10T17:44:16.196Z",
+      "actor": "متبرع: محمد نشوان (re32vo@gmail.com)",
+      "action": "تحديث_بريد",
+      "details": {
+        "oldEmail": "re32vo@gmail.com",
+        "newEmail": "irjt12@gmail.com",
+        "type": "donor_email_update"
+      }
+    },
+    {
+      "id": "1770745406334-ev75do",
+      "timestamp": "2026-02-10T17:43:26.334Z",
+      "actor": "متبرع: re32vo@gmail.com",
+      "action": "تسجيل حساب متبرع جديد",
+      "details": {
+        "email": "re32vo@gmail.com",
+        "name": "محمد",
+        "phone": "0533170903",
+        "type": "donor_registration"
+      }
+    },
+    {
+      "id": "1770745387914-of82j1",
+      "timestamp": "2026-02-10T17:43:07.914Z",
+      "actor": "متبرع: re32vo@gmail.com",
+      "action": "طلب كود إنشاء حساب",
+      "details": {
+        "expiresIn": "10 دقائق"
+      }
+    },
+    {
+      "id": "1770743494832-b5r7vk",
+      "timestamp": "2026-02-10T17:11:34.832Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770743475298-l9gl0n",
+      "timestamp": "2026-02-10T17:11:15.298Z",
+      "actor": "متطوع: re32vo@gmail.com",
+      "action": "create_volunteer",
+      "details": {
+        "name": "محمد",
+        "email": "re32vo@gmail.com",
+        "phone": "0533170903",
+        "opportunityTitle": "مساعدة في التوعية الصحية"
+      }
+    },
+    {
+      "id": "1770743472320-t8lgn7",
+      "timestamp": "2026-02-10T17:11:12.320Z",
+      "actor": "متطوع: re32vo@gmail.com",
+      "action": "create_volunteer",
+      "details": {
+        "name": "محمد",
+        "email": "re32vo@gmail.com",
+        "phone": "0533170903",
+        "opportunityTitle": "مساعدة في التوعية الصحية"
+      }
+    },
+    {
+      "id": "1770742644284-rtck1g",
+      "timestamp": "2026-02-10T16:57:24.284Z",
+      "actor": "مراسل: re32vo@gmail.com",
+      "action": "create_contact",
+      "details": {
+        "name": "محمد",
+        "email": "re32vo@gmail.com",
+        "phone": "0533170903"
+      }
+    },
+    {
+      "id": "1770742616097-5g244x",
+      "timestamp": "2026-02-10T16:56:56.097Z",
+      "actor": "متقدم وظيفة: re32vo@gmail.com",
+      "action": "create_job",
+      "details": {
+        "fullName": "محمد",
+        "email": "re32vo@gmail.com",
+        "phone": "0533170903",
+        "qualifications": "دبلوم"
+      }
+    },
+    {
+      "id": "1770742539499-bbkt1t",
+      "timestamp": "2026-02-10T16:55:39.499Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770663561175-gx6xst",
+      "timestamp": "2026-02-09T18:59:21.175Z",
+      "actor": "bedaihsa@gmail.com",
+      "action": "direct_login",
+      "details": {
+        "method": "direct"
+      }
+    },
+    {
+      "id": "1770663549886-widqa2",
+      "timestamp": "2026-02-09T18:59:09.886Z",
+      "actor": "مستفيد: re32vo@gmail.com",
+      "action": "create_beneficiary",
+      "details": {
+        "fullName": "محمد",
+        "email": "re32vo@gmail.com",
+        "phone": "0533170903",
+        "assistanceType": "financial"
+      }
+    },
+    {
       "id": "1770653604888-s8n1c0",
       "timestamp": "2026-02-09T16:13:24.888Z",
       "actor": "bedaihsa@gmail.com",
